@@ -8303,34 +8303,6 @@ input, select, textarea {
 		border-top-color: rgba(0, 0, 0, 0.2);
 	}
 
-/* Responsive adjustments for the navigation menu */
-@media screen and (max-width: 480px) {
-    /* Ensure the header content aligns properly */
-    header {
-        padding: 5px 0; /* Reduce padding for more space */
-    }
-
-    /* Adjust the navigation bar to stack the buttons vertically or handle limited space */
-    nav ul {
-        flex-direction: column; /* Stack menu items vertically */
-        align-items: center;
-    }
-
-    /* Modify each menu item to fill available space and center-align */
-    nav ul li {
-        margin: 5px 0; /* Space between items */
-        width: 100%; /* Full width for each item */
-        text-align: center; /* Center-align text */
-    }
-
-    /* Ensure the links adapt well to smaller screens */
-    nav ul li a {
-        font-size: 16px; /* Adjust font size if needed */
-        padding: 10px 15px; /* Add padding for clickable area */
-        display: block; /* Each link fills the list item container */
-    }
-}
-
 
 /* Wrapper */
 
