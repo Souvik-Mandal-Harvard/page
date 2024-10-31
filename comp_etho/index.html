@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Computational Ethology</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.fa-anchor,.fa-coffee {font-size:200px}
+</style>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-red w3-card w3-left-align w3-large">
+    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
+    <a href="ce_schedule_2021.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">SCHEDULE</a>
+    <a href="https://drive.google.com/drive/folders/1w72QKPF3qzHvuvmxqejuml_gOLHnJbUb?usp=sharing" target="_blank" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">GUIDING MATERIALS</a>
+    <a href="https://github.com/Souvik-Mandal-Harvard/page/tree/main/teaching/codes" target="_blank" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">DOWNLOAD CODES</a>
+    <a href="https://forms.gle/wxEH7FKnSm3hwWyP9" target="_blank" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">FEEDBACK</a>
+  </div>
+
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 4</a>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="w3-container w3-red w3-center" style="padding:90px 16px">
+  <h1 class="w3-margin w3-jumbo">LS/MCB100: Introduction to Computational Ethology</h1>
+  <p class="w3-xlarge">offered at Harvard University</p>
+  <p class="w3-xlarge">by Souvik Mandal</p>
+    <p class="w3-xlarge" >Center for Brain Science / Molucular and Cellular Biology</p>
+  <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top" onclick = "window.location.href='https://canvas.harvard.edu/courses/89886';">Harvard course website</button>
+</header>
+
+<!-- First Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+    
+      <center><h1 style="color: #FF7A59;">Welcome to Computational Ethology!</h1></center>
+    
+      <p style="font-size:1.2vw"> One of the most important parts of ethological studies is testing hypotheses by collecting and analyzing behavioral data. Pioneers of ethological studies recorded quantitative data on behavior through manual observations. Though conducting such manual observation is still very relevant for so many reasons, it could be cumbersome. With the advent of technology, however, now we can automatize "extracting" behavioral data from videos. And in this course, we introduce cutting-edge computational tools that can do this job. We designed it especially for students who have a compelling question on behavior but have little or no experience in modern computation!</p>
+      
+      <center><h2 style="color: #FF7A59;">Watch this video made for the Fall 2020 class!</h2></center>
+      <div style="text-align: center;"><iframe width="560" height="315" src="https://www.youtube.com/embed/Bh9VKLTbigY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      
+      <center><h2 style="color: #FF7A59;">Goal of the course: What will you learn?</h2></center>
+
+      <p style="font-size:1.2vw">
+          This course aims to make students comfortable with usage of modern computational tools for quantitative measurement of movement and behavior from videos. We will focus on behaviors that are defined by the movements of body-parts (although behavior can be auditory and olfactory). For that, tracking  precise movements of body-parts in a sub-second resolution is critical, and you will learn to do so using deep learning tools. Specifically, you will learn to formulate a movement or behavior-related question into a scientific hypothesis; testing it by using computer vision, artificial intelligence, cloud computing, clustering methods and statistical analyses and data visualization in Python and/or R; and presenting your work, and writing a final report.</p>
+      
+       <center><h2 style="color: #FF7A59;">Applications</h2></center>
+      
+      <p style="font-size:1.2vw">
+          Measuring temporal sequences of body postures of wild, domestic, lab animals and humans is crucial for several other fields of research like neurobiology, ecology, biomechanics, biophysics, biomimetics (animal-inspired robots), medical studies, and sports. Such data can also revolutionize performing/visual art forms like dance, acting, and 3D movie creation. Therefore, students from non-biology backgrounds can benefit from taking this course as well.</p>
+      
+      <div style="text-align: center;">
+          <img src="20211013_SSsf.gif" alt="Tracking_rowing_practice" width="75%" />
+          <img src="ant_collective.gif" alt="Tracking_ant_collective_behaior" width="75%" />
+      </div>
+
+      
+      <center><h2 style="color: #FF7A59;">Learning style</h2></center>
+      
+      <p style="font-size:1.2vw">
+          It is a hand-on experience based course! You can access all the reading materials on this website any time suitable for you - find these on the "GUIDING MATERIAL" and "DOWNLOAD CODES". Go through those at your own pace. If you face any problem, <a href="mailto:souvik_mandal@g.harvard.edu">shoot me an email</a>. We will discuss that during the next meeting.</p>
+
+  </div>
+</div>
+    
+<!-- Second Grid -->
+<div class="w3-light-grey w3-padding-64 w3-container">
+  <div class="w3-content">
+
+    <div>
+      <h1>“Our organ of thought may be superior, and we may play it better, but it is surely vain to believe that other possessors of similar instruments leave them quite untouched.”</h1>
+      <h5>- Stephen walker</h5>
+
+
+    </div>
+  </div>
+</div>
+
+<!--<div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
+    <h1 class="w3-margin w3-xlarge">Stay connected!</h1>
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-center w3-opacity">  
+  <div class="w3-xlarge w3-padding-32">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+    <i class="fa fa-youtube w3-hover-opacity"></i>
+ </div>
+       <p class="text-muted small mb-0">Copyright &copy; <script>document.write(new Date().getFullYear())</script> <a href="https://souvikmandal.info">Souvik Mandal</a></p>
+
+
+</footer>
+
+<script>
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
+
+</body>
+</html>
