@@ -36,6 +36,37 @@ jobs:
 
           find _site -name '.DS_Store' -delete
 
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          site_dir = Path("_site")
+          routes_dir = site_dir / "teaching-learning" / "ls100" / "build" / "routes"
+          replacements = {}
+
+          if routes_dir.is_dir():
+              for path in sorted(routes_dir.iterdir()):
+                  if not path.is_file() or re.fullmatch(r"[A-Za-z0-9._-]+", path.name):
+                      continue
+                  sanitized_name = re.sub(r"[^A-Za-z0-9._-]+", "_", path.name)
+                  if sanitized_name in replacements.values() or (routes_dir / sanitized_name).exists():
+                      raise RuntimeError(f"Sanitized route filename collision for {path.name} -> {sanitized_name}")
+                  path.rename(routes_dir / sanitized_name)
+                  replacements[path.name] = sanitized_name
+
+          if replacements:
+              text_extensions = {".css", ".html", ".js", ".json", ".txt", ".xml", ".xsl"}
+              for file_path in site_dir.rglob("*"):
+                  if not file_path.is_file() or file_path.suffix.lower() not in text_extensions:
+                      continue
+                  original = file_path.read_text(encoding="utf-8")
+                  updated = original
+                  for old_name, new_name in replacements.items():
+                      updated = updated.replace(old_name, new_name)
+                  if updated != original:
+                      file_path.write_text(updated, encoding="utf-8")
+          PY
+
           test -f _site/.nojekyll
           test -f _site/CNAME
           test -f _site/index.html
