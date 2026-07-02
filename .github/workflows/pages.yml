@@ -59,7 +59,7 @@ jobs:
       id-token: write
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url || steps.deployment_retry.outputs.page_url }}
+      url: ${{ steps.selected_url.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
@@ -71,3 +71,13 @@ jobs:
         if: steps.deployment.outcome == 'failure'
         id: deployment_retry
         uses: actions/deploy-pages@v4
+
+      - name: Select deployed page URL
+        if: always()
+        id: selected_url
+        run: |
+          if [ "${{ steps.deployment.outcome }}" = "success" ]; then
+            echo "page_url=${{ steps.deployment.outputs.page_url }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "page_url=${{ steps.deployment_retry.outputs.page_url }}" >> "$GITHUB_OUTPUT"
+          fi
