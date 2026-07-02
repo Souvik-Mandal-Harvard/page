@@ -30,12 +30,20 @@ jobs:
           mkdir -p _site
 
           for path in .nojekyll CNAME index.html cv.html assets images cv comp_etho teaching-learning; do
+            test -e "$path" || { echo "Missing required path: $path" >&2; exit 1; }
             cp -a "$path" "_site/$path"
           done
 
           find _site -name '.DS_Store' -delete
 
+          test -f _site/.nojekyll
+          test -f _site/CNAME
           test -f _site/index.html
+          test -f _site/cv.html
+          test -d _site/assets
+          test -d _site/images
+          test -d _site/cv
+          test -d _site/comp_etho
           test -f _site/teaching-learning/ls100/index.html
 
       - name: Upload Pages artifact
