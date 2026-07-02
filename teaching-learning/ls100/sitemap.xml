@@ -14,121 +14,121 @@
     <loc>http://localhost:3000/module-00a-research-plans-and-proposals</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-research-guide01-writing-research-plans-and-</loc>
+    <loc>http://localhost:3000/ls100-module-00a-research-content-01-guide-01-writ</loc>
   </url>
   <url>
     <loc>http://localhost:3000/module-00b-python-fundamentals</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-computation-guide01-getting-started-with-pyt</loc>
+    <loc>http://localhost:3000/ls100-module-00b-content-01-guide-01-getting-start</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-computation-guide02-essential-python-termino</loc>
+    <loc>http://localhost:3000/ls100-module-00b-content-02-guide-02-essential-pyt</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-python-fundamentals-00-notebook01-data-in-py</loc>
+    <loc>http://localhost:3000/ls100-module-00b-content-03-notebook-01-data-in-py</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-python-fundamentals-00-notebook02-data-autom</loc>
+    <loc>http://localhost:3000/ls100-module-00b-content-04-notebook-02-data-autom</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-python-fundamentals-00-notebook03-data-visua</loc>
+    <loc>http://localhost:3000/ls100-module-00b-content-05-notebook-03-data-visua</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-python-fundamentals-00-notebook04-computatio</loc>
+    <loc>http://localhost:3000/ls100-module-00b-content-06-notebook-04-computatio</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-python-fundamentals-00-notebook05-intro-to-p</loc>
+    <loc>http://localhost:3000/ls100-module-00b-content-07-notebook-05-intro-to-p</loc>
   </url>
   <url>
     <loc>http://localhost:3000/module-01a-video-data</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-video-00-getting-started</loc>
+    <loc>http://localhost:3000/ls100-module-01a-video-data-content-01-00-getting-</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-video-01-video-processing-frame-reduction-wi</loc>
+    <loc>http://localhost:3000/ls100-module-01a-video-data-content-02-stage-01-vi</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-video-01-video-processing-video-chunker-by-f</loc>
+    <loc>http://localhost:3000/ls100-module-01a-video-data-content-03-stage-01-vi</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-video-01-video-processing-video-clipping-las</loc>
+    <loc>http://localhost:3000/ls100-module-01a-video-data-content-04-stage-01-vi</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-video-02-cv-applied-ml-pose-estimation-extra</loc>
+    <loc>http://localhost:3000/ls100-module-01a-video-data-content-05-stage-02-cv</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-video-02-cv-applied-ml-pose-estimation-extra-1</loc>
+    <loc>http://localhost:3000/ls100-module-01a-video-data-content-06-stage-02-cv</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-video-02-cv-applied-ml-pose-estimation-extra-2</loc>
+    <loc>http://localhost:3000/ls100-module-01a-video-data-content-07-stage-02-cv</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-video-02-cv-applied-ml-pose-estimation-extra-3</loc>
+    <loc>http://localhost:3000/ls100-module-01a-video-data-content-08-stage-02-cv</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-video-02-cv-applied-ml-training-custom-objec</loc>
+    <loc>http://localhost:3000/ls100-module-01a-video-data-content-09-stage-02-cv</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-video-03-data-wrangling-pose-estimation-extr</loc>
+    <loc>http://localhost:3000/ls100-module-01a-video-data-content-10-stage-03-da</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-video-03-data-wrangling-pose-estimation-extr-1</loc>
+    <loc>http://localhost:3000/ls100-module-01a-video-data-content-11-stage-03-da</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-video-04-data-wrangling-pose-estimation-deri</loc>
+    <loc>http://localhost:3000/ls100-module-01a-video-data-content-12-stage-04-da</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-video-05a-cv-applied-ml-sequence-based-class</loc>
+    <loc>http://localhost:3000/ls100-module-01a-video-data-content-13-stage-05-cv</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-video-05b-cv-applied-ml-sequence-based-class</loc>
+    <loc>http://localhost:3000/ls100-module-01a-video-data-content-14-stage-05-cv</loc>
   </url>
   <url>
     <loc>http://localhost:3000/module-01b-audio-data</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-00-introduction-to-digital-audio-python-last</loc>
+    <loc>http://localhost:3000/ls100-module-01b-audio-data-content-00-guide-01-in</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-audio-data-00-foundation-lastupdated-2026060</loc>
+    <loc>http://localhost:3000/ls100-module-01b-audio-data-content-01-notebook-00</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-audio-data-01b-music-feature-extraction-last</loc>
+    <loc>http://localhost:3000/ls100-module-01b-audio-data-content-02-notebook-01</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-audio-data-01-feature-extraction-from-digita</loc>
+    <loc>http://localhost:3000/ls100-module-01b-audio-data-content-03-notebook-02</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-audio-data-02-feature-extraction-from-digita</loc>
+    <loc>http://localhost:3000/ls100-module-01b-audio-data-content-04-notebook-03</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-audio-data-03-digital-audio-clustering-lastu</loc>
+    <loc>http://localhost:3000/ls100-module-01b-audio-data-content-05-notebook-04</loc>
   </url>
   <url>
     <loc>http://localhost:3000/module-02-data-science-and-statistics</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-stats-guide01-navigational-guide-to-statisti</loc>
+    <loc>http://localhost:3000/ls100-module-02-content-01-guide01-navigational-gu</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-datascience-classical-statistical-tests-last</loc>
+    <loc>http://localhost:3000/ls100-module-02-content-02-nb01-datascience-classi</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-datascience-intro-to-mixed-effect-models-las</loc>
+    <loc>http://localhost:3000/ls100-module-02-content-03-nb02-datascience-intro-</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-data-wrangling-helpercode-finding-local-extr</loc>
+    <loc>http://localhost:3000/ls100-module-02-content-04-nb03-data-wrangling-hel</loc>
   </url>
   <url>
     <loc>http://localhost:3000/module-03-communication-and-presentation</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-research-guide02-art-of-communicating-scienc</loc>
+    <loc>http://localhost:3000/ls100-module-03-research-content01-guide01-art-of-</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/career-guide01-data-careers</loc>
+    <loc>http://localhost:3000/ls100-career-guide01-data-careers</loc>
   </url>
   <url>
     <loc>http://localhost:3000/reading-guides</loc>
