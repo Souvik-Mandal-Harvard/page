@@ -36,6 +36,47 @@ jobs:
 
           find _site -name '.DS_Store' -delete
 
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          safe_filename_pattern = r"[A-Za-z0-9._-]+"
+          unsafe_filename_pattern = r"[^A-Za-z0-9._-]+"
+          site_dir = Path("_site")
+          build_dir = site_dir / "teaching-learning" / "ls100" / "build"
+          routes_dir = build_dir / "routes"
+          replacements = {}
+          sanitized_names = set()
+
+          if routes_dir.is_dir():
+              for path in sorted(routes_dir.iterdir()):
+                  if not path.is_file() or re.fullmatch(safe_filename_pattern, path.name):
+                      continue
+                  original_name = path.name
+                  sanitized_name = re.sub(unsafe_filename_pattern, "_", path.name)
+                  if sanitized_name in sanitized_names or (routes_dir / sanitized_name).exists():
+                      raise RuntimeError(
+                          f"Sanitized route filename collision: {original_name} -> {sanitized_name} "
+                          "(conflicts with an existing file or another sanitized name)"
+                      )
+                  path.rename(routes_dir / sanitized_name)
+                  replacements[original_name] = sanitized_name
+                  sanitized_names.add(sanitized_name)
+
+          if replacements:
+              route_url_prefix = "/teaching-learning/ls100/build/routes/"
+              for manifest_path in build_dir.glob("manifest-*.js"):
+                  original = manifest_path.read_text(encoding="utf-8")
+                  updated = original
+                  for old_name, new_name in replacements.items():
+                      updated = updated.replace(
+                          f"{route_url_prefix}{old_name}",
+                          f"{route_url_prefix}{new_name}",
+                      )
+                  if updated != original:
+                      manifest_path.write_text(updated, encoding="utf-8")
+          PY
+
           test -f _site/.nojekyll
           test -f _site/CNAME
           test -f _site/index.html
