@@ -47,12 +47,15 @@ jobs:
 
           if routes_dir.is_dir():
               for path in sorted(routes_dir.iterdir()):
-                  if not path.is_file() or re.fullmatch(r"[A-Za-z0-9._-]+", path.name):
+                  if not path.is_file() or re.fullmatch(r"[A-Za-z0-9.\-_]+", path.name):
                       continue
                   original_name = path.name
-                  sanitized_name = re.sub(r"[^A-Za-z0-9._-]+", "_", path.name)
+                  sanitized_name = re.sub(r"[^A-Za-z0-9.\-_]+", "_", path.name)
                   if sanitized_name in replacements.values() or (routes_dir / sanitized_name).exists():
-                      raise RuntimeError(f"Sanitized route filename collision for {original_name} -> {sanitized_name}")
+                      raise RuntimeError(
+                          f"Sanitized route filename collision: {original_name} -> {sanitized_name} "
+                          "(conflicts with an existing file or another sanitized name)"
+                      )
                   path.rename(routes_dir / sanitized_name)
                   replacements[original_name] = sanitized_name
 
