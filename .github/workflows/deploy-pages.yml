@@ -1,0 +1,46 @@
+# Publish the whole personal site (souvikmandal.info) to GitHub Pages via the
+# ARTIFACT method (actions/deploy-pages). This is required because the site now
+# includes the MyST course build under /teaching-learning/ls100, whose route
+# bundles have special characters in their filenames ($, [, ], (, )). GitHub
+# Pages "Deploy from a branch" 404s those files; the artifact method serves them.
+#
+# One-time setup: repo Settings -> Pages -> Build and deployment -> Source: "GitHub Actions".
+name: Deploy site to GitHub Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy1.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Stage site (exclude VCS/CI)
+        run: |
+          mkdir -p _site
+          rsync -a --exclude='.git' --exclude='.github' --exclude='_site' ./ _site/
+          touch _site/.nojekyll
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Deploy to GitHub Pages (attempt 1)
+        id: deploy1
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+      - name: Deploy to GitHub Pages (retry)
+        if: steps.deploy1.outcome == 'failure'
+        uses: actions/deploy-pages@v4
