@@ -1,0 +1,126 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Prepare site artifact
+        run: |
+          set -euxo pipefail
+
+          mkdir -p _site
+
+          for path in .nojekyll CNAME index.html cv.html assets images cv comp_etho teaching-learning; do
+            test -e "$path" || { echo "Missing required path: $path" >&2; exit 1; }
+            cp -a "$path" "_site/$path"
+          done
+
+          find _site -name '.DS_Store' -delete
+
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          safe_filename_pattern = r"[A-Za-z0-9._-]+"
+          unsafe_filename_pattern = r"[^A-Za-z0-9._-]+"
+          site_dir = Path("_site")
+          build_dir = site_dir / "teaching-learning" / "ls100" / "build"
+          routes_dir = build_dir / "routes"
+          replacements = {}
+          sanitized_names = set()
+
+          if routes_dir.is_dir():
+              for path in sorted(routes_dir.iterdir()):
+                  if not path.is_file() or re.fullmatch(safe_filename_pattern, path.name):
+                      continue
+                  original_name = path.name
+                  sanitized_name = re.sub(unsafe_filename_pattern, "_", path.name)
+                  if sanitized_name in sanitized_names or (routes_dir / sanitized_name).exists():
+                      raise RuntimeError(
+                          f"Sanitized route filename collision: {original_name} -> {sanitized_name} "
+                          "(conflicts with an existing file or another sanitized name)"
+                      )
+                  path.rename(routes_dir / sanitized_name)
+                  replacements[original_name] = sanitized_name
+                  sanitized_names.add(sanitized_name)
+
+          if replacements:
+              route_url_prefix = "/teaching-learning/ls100/build/routes/"
+              for manifest_path in build_dir.glob("manifest-*.js"):
+                  original = manifest_path.read_text(encoding="utf-8")
+                  updated = original
+                  for old_name, new_name in replacements.items():
+                      updated = updated.replace(
+                          f"{route_url_prefix}{old_name}",
+                          f"{route_url_prefix}{new_name}",
+                      )
+                  if updated != original:
+                      manifest_path.write_text(updated, encoding="utf-8")
+          PY
+
+          test -f _site/.nojekyll
+          test -f _site/CNAME
+          test -f _site/index.html
+          test -f _site/cv.html
+          test -d _site/assets
+          test -d _site/images
+          test -d _site/cv
+          test -d _site/comp_etho
+          test -f _site/teaching-learning/ls100/index.html
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+          include-hidden-files: true
+
+  deploy:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.selected_url.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+
+      - name: Retry GitHub Pages deploy
+        if: steps.deployment.outcome == 'failure'
+        id: deployment_retry
+        uses: actions/deploy-pages@v4
+
+      - name: Select deployed page URL
+        if: always()
+        id: selected_url
+        run: |
+          if [ "${{ steps.deployment.outcome }}" = "success" ] && [ -n "${{ steps.deployment.outputs.page_url }}" ]; then
+            echo "page_url=${{ steps.deployment.outputs.page_url }}" >> "$GITHUB_OUTPUT"
+          elif [ "${{ steps.deployment_retry.outcome }}" = "success" ] && [ -n "${{ steps.deployment_retry.outputs.page_url }}" ]; then
+            echo "page_url=${{ steps.deployment_retry.outputs.page_url }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "page_url=" >> "$GITHUB_OUTPUT"
+          fi
