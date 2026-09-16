@@ -1,7 +1,7 @@
 ---
 subtitle: 'LS100 — Module 00A · Research Plans & Proposals'
 title: Framing Research Plans and Proposals
-short_title: Guide 01 - Research
+short_title: Guide 01 - Research Plan
 exports:
   - format: pdf
     template: lapreprint-typst
@@ -12,7 +12,7 @@ downloads:
     title: Download the article (PDF)
 ---
 
-_Last updated: 2026-07-02_ <!--last-updated-->
+_Last updated: 2026-09-15_ <!--last-updated-->
 
 *Authored by* **Souvik Mandal, Ph.D.**
 
