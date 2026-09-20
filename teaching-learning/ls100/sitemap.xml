@@ -14,10 +14,13 @@
     <loc>http://localhost:3000/module-00a-research-plans-and-proposals</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-module-00a-research-content-01-guide-01-writ</loc>
+    <loc>http://localhost:3000/ls100-module-00a-research-content-00-guide-00-conv</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-module-00a-research-content-02-guide-02-pres</loc>
+    <loc>http://localhost:3000/ls100-module-00a-research-content-01-guide-01-pres</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ls100-module-00a-research-content-02-guide-02-writ</loc>
   </url>
   <url>
     <loc>http://localhost:3000/module-00b-python-fundamentals</loc>
