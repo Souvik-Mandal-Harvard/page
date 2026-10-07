@@ -1,0 +1,41 @@
+---
+// The portrait swaps with the visitor's light/dark setting. The browser picks
+// the first matching <source>, so only one photo is ever downloaded.
+import { getImage } from 'astro:assets';
+import light from '../assets/portrait_lightMode.jpg';
+import dark from '../assets/portrait_darkMode.jpg';
+
+interface Props {
+  alt: string;
+}
+
+const { alt } = Astro.props;
+const widths = [360, 540, 720, 960];
+const sizes = '(min-width: 64rem) 24rem, (min-width: 48rem) 40vw, 14rem';
+const formats = ['avif', 'webp'] as const;
+
+const srcsets = async (src: ImageMetadata) =>
+  Promise.all(formats.map(async (format) => ({ format, srcset: (await getImage({ src, widths, format })).srcSet.attribute })));
+
+const [darkSources, lightSources, fallback] = await Promise.all([
+  srcsets(dark),
+  srcsets(light),
+  getImage({ src: light, width: 960, widths, format: 'jpg' }),
+]);
+---
+
+<picture>
+  {darkSources.map((s) => <source media="(prefers-color-scheme: dark)" type={`image/${s.format}`} srcset={s.srcset} sizes={sizes} />)}
+  {lightSources.map((s) => <source type={`image/${s.format}`} srcset={s.srcset} sizes={sizes} />)}
+  <img
+    src={fallback.src}
+    srcset={fallback.srcSet.attribute}
+    sizes={sizes}
+    alt={alt}
+    width={fallback.attributes.width}
+    height={fallback.attributes.height}
+    loading="eager"
+    fetchpriority="high"
+    decoding="async"
+  />
+</picture>

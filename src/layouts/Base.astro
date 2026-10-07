@@ -1,0 +1,93 @@
+---
+import '@fontsource-variable/source-serif-4';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Icon from '../components/Icon.astro';
+import { person, socials } from '../data/profile';
+
+interface Props {
+  title?: string;
+  description?: string;
+  type?: 'website' | 'article';
+}
+
+const {
+  title = `${person.name} · Data & AI engineer, AI solutions architect, educator`,
+  description = 'Souvik Mandal is a data engineer and AI solutions architect with a PhD in quantitative behavioral sciences: formerly at LabXchange (Harvard), now building AI products, teaching at Harvard and consulting on data and AI/ML.',
+  type = 'website',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og-image.jpg', Astro.site);
+const goatcounter = import.meta.env.PUBLIC_GOATCOUNTER_CODE;
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: person.name,
+  url: person.site,
+  image: ogImage.href,
+  jobTitle: 'Data Engineer & AI Solutions Architect',
+  affiliation: { '@type': 'CollegeOrUniversity', name: 'Harvard University' },
+  alumniOf: ['Indian Institute of Science', 'University of Calcutta'],
+  address: { '@type': 'PostalAddress', addressRegion: 'MA', addressCountry: 'US' },
+  knowsLanguage: ['English', 'Bangla', 'Hindi', 'Urdu', 'Punjabi', 'Bhojpuri'],
+  sameAs: socials.map((s) => s.href),
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#faf8f4" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#111413" media="(prefers-color-scheme: dark)" />
+
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@SouvikMandal_" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+
+    {
+      /* Privacy-friendly analytics: set the GOATCOUNTER_CODE repository variable to switch it on. */
+      goatcounter && (
+        <script is:inline async data-goatcounter={`https://${goatcounter}.goatcounter.com/count`} src="https://gc.zgo.at/count.js" />
+      )
+    }
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <p>© {new Date().getFullYear()} {person.name}</p>
+        <ul class="social-links" aria-label="Elsewhere">
+          {
+            socials.map((s) => (
+              <li>
+                <a href={s.href} aria-label={s.label} title={s.label}>
+                  <Icon name={s.key} size={18} />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>
