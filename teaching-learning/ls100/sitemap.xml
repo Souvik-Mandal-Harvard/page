@@ -56,64 +56,64 @@
     <loc>http://localhost:3000/module-01a-video-data</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-module-01a-video-data-content-00-guide-00-in</loc>
+    <loc>http://localhost:3000/ls100-module-01a-stage-01-01-guide-introduction-to</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-module-01a-video-data-content-00-guide-01-in</loc>
+    <loc>http://localhost:3000/ls100-module-01a-stage-01-02-guide-introduction-to</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-module-01a-video-data-content-00-guide-02-ma</loc>
+    <loc>http://localhost:3000/ls100-module-01a-stage-01-03-guide-make-your-own-c</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-module-01a-video-data-content-01-00-getting-</loc>
+    <loc>http://localhost:3000/ls100-module-01a-stage-01-04-getting-started</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-module-01a-video-data-content-02-stage-01-vi</loc>
+    <loc>http://localhost:3000/ls100-module-01a-stage-02-01-frame-reduction</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-module-01a-video-data-content-03-stage-01-vi</loc>
+    <loc>http://localhost:3000/ls100-module-01a-stage-02-02-video-chunker</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-module-01a-video-data-content-04-stage-01-vi</loc>
+    <loc>http://localhost:3000/ls100-module-01a-stage-02-03-video-clipping</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-module-01a-video-data-content-05-stage-01-vi</loc>
+    <loc>http://localhost:3000/ls100-module-01a-stage-02-04-crop-video</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-module-01a-video-data-content-05-stage-02-cv</loc>
+    <loc>http://localhost:3000/ls100-module-01a-stage-03-01-pose-estimation-media</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-module-01a-video-data-content-06-stage-02-cv</loc>
+    <loc>http://localhost:3000/ls100-module-01a-stage-03-02-pose-estimation-yolo</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-module-01a-video-data-content-07-stage-02-cv</loc>
+    <loc>http://localhost:3000/ls100-module-01a-stage-03-03-pose-estimation-yolo-</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-module-01a-video-data-content-08-stage-02-cv</loc>
+    <loc>http://localhost:3000/ls100-module-01a-stage-03-04-pose-estimation-yolo-</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-module-01a-video-data-content-09b-stage-02-c</loc>
+    <loc>http://localhost:3000/ls100-module-01a-stage-04-01-train-yolo-custom-obj</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-module-01a-video-data-content-09c-stage-02-c</loc>
+    <loc>http://localhost:3000/ls100-module-01a-stage-04-02-track-blob-simple</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-module-01a-video-data-content-09-stage-02-cv</loc>
+    <loc>http://localhost:3000/ls100-module-01a-stage-04-03-track-blob-sam2</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-module-01a-video-data-content-10-stage-03-da</loc>
+    <loc>http://localhost:3000/ls100-module-01a-stage-05-01-body-angles-from-medi</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-module-01a-video-data-content-11-stage-03-da</loc>
+    <loc>http://localhost:3000/ls100-module-01a-stage-05-02-body-angles-from-yolo</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-module-01a-video-data-content-12-stage-04-da</loc>
+    <loc>http://localhost:3000/ls100-module-01a-stage-05-03-derive-indices-from-a</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-module-01a-video-data-content-13-stage-05-cv</loc>
+    <loc>http://localhost:3000/ls100-module-01a-stage-06-01-sequence-classificati</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/ls100-module-01a-video-data-content-14-stage-05-cv</loc>
+    <loc>http://localhost:3000/ls100-module-01a-stage-06-02-sequence-classificati</loc>
   </url>
   <url>
     <loc>http://localhost:3000/module-01b-audio-data</loc>
