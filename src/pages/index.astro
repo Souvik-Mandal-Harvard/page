@@ -1,0 +1,237 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import LoopVideo from '../components/LoopVideo.astro';
+import ThemePortrait from '../components/ThemePortrait.astro';
+import { formatDate, getPosts } from '../lib';
+import { beyond, caseStudies, journey, mission, person, publications, publicationsSummary, skills, socials, toolbox } from '../data/profile';
+
+const posts = await getPosts();
+---
+
+<Base>
+  <!-- Hero -->
+  <section class="hero container">
+    <div class="hero__photo">
+      <ThemePortrait alt="Portrait of Souvik Mandal" />
+    </div>
+    <div class="hero__text">
+      <p class="eyebrow">{person.roles.join(' · ')}</p>
+      <h1>{person.headline}</h1>
+      <p class="lede" set:html={person.summary} />
+      <div class="actions">
+        <a href="#work" class="button">See my work</a>
+        <a href="/cv.html" class="button button--ghost">View CV</a>
+      </div>
+      <ul class="social-links" aria-label="Find me online">
+        {
+          socials.map((s) => (
+            <li>
+              <a href={s.href} aria-label={s.label} title={s.label}>
+                <Icon name={s.key} />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Mission -->
+  <section id="mission" class="mission container">
+    <p class="eyebrow">Mission</p>
+    <h2>{mission.heading}</h2>
+    <div class="mission__groups">
+      {
+        mission.groups.map((g) => (
+          <div class="mission__group">
+            <h3>{g.who}</h3>
+            <p>{g.what}</p>
+          </div>
+        ))
+      }
+    </div>
+    <p class="mission__also">
+      <span>Also open to data &amp; AI work in</span>
+      {mission.alsoOpenTo.map((f) => <a href={f.href}>{f.label}</a>)}
+    </p>
+  </section>
+
+  <!-- Selected work -->
+  <section id="work" class="section container">
+    <header class="section__header">
+      <p class="eyebrow">Selected work</p>
+      <h2>From watching ants to shipping AI products</h2>
+      <p>The thread through my work: turn messy, real-world data into systems that other people can use and trust.</p>
+    </header>
+
+    <div class="cases">
+      {
+        caseStudies.map((c) => (
+          <article class:list={['case', { 'case--media': c.media }]} id={c.id}>
+            <div class="case__body">
+              <p class="case__context">{c.context}</p>
+              <h3>{c.title}</h3>
+              <dl class="case__story">
+                <dt>Challenge</dt>
+                <dd>{c.problem}</dd>
+                <dt>What I did</dt>
+                <dd>{c.approach}</dd>
+                <dt>Result</dt>
+                <dd>{c.outcome}</dd>
+              </dl>
+              <ul class="tags" aria-label="Skills used">
+                {c.skills.map((s) => <li>{s}</li>)}
+              </ul>
+              {c.links.length > 0 && (
+                <p class="case__links">
+                  {c.links.map((l) => <a href={l.href}>{l.label} →</a>)}
+                </p>
+              )}
+            </div>
+            {c.media && <LoopVideo {...c.media} />}
+          </article>
+        ))
+      }
+    </div>
+
+    <details class="publications">
+      <summary>Selected publications</summary>
+      <ol>
+        {
+          publications.map((p) => (
+            <li>
+              {p.cite}. <a href={p.href}>{p.title}</a>. <em>{p.venue}</em>
+            </li>
+          ))
+        }
+      </ol>
+      <p>
+        {publicationsSummary} Full list on <a href={socials.find((s) => s.key === 'scholar')!.href}>Google Scholar</a>. * joint first authors.
+      </p>
+    </details>
+  </section>
+
+  <!-- Transferable skills -->
+  <section id="skills" class="section section--tinted">
+    <div class="container">
+      <header class="section__header">
+        <p class="eyebrow">Transferable skills</p>
+        <h2>What I bring, and where it fits</h2>
+        <p>Every skill below has been tested on real projects. Here is the evidence, and the kinds of teams it carries over to.</p>
+      </header>
+
+      <div class="skills">
+        {
+          skills.map((s) => (
+            <article class="skill">
+              <h3>{s.skill}</h3>
+              <p>{s.proof}</p>
+              <p class="skill__fields">
+                <span class="visually-hidden">Applies to: </span>
+                {s.fields.join(' · ')}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+
+      <h3 class="toolbox__title">Toolbox</h3>
+      <ul class="tags tags--large">
+        {toolbox.map((t) => <li>{t}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section container about">
+    <div class="about__story">
+      <p class="eyebrow">About</p>
+      <h2>Why I do this</h2>
+      <p>
+        I dream of a world where everyone has equal access to knowledge, opportunity and justice, where all life is treated with dignity, and where growth works with nature instead of against it. I believe making
+        high-quality, relevant education available to everyone is the most sustainable way to get there.
+      </p>
+      <p>
+        Formal education has barely changed in centuries, and learning outcomes are <a href="https://www.unicef.org/reports/state-global-education-crisis">falling for much of the world</a>. Too often, what students are taught doesn’t
+        match what they want to learn, or what they will need. I want to help build an education system that sparks curiosity, crosses subject boundaries and prepares people for real problems, backed by what research tells us about
+        how people learn.
+      </p>
+      <blockquote>
+        <p>Tech and AI can replace the repetitive tasks of teachers, but not teachers. We can use technology to help teachers do what they love: teach.</p>
+      </blockquote>
+    </div>
+
+    <div class="about__journey">
+      <h3>The path so far</h3>
+      <ol class="timeline">
+        {
+          journey.map((j) => (
+            <li>
+              <span class="timeline__when">{j.when}</span>
+              <div>
+                <p class="timeline__what">{j.what}</p>
+                <p class="timeline__where">{j.where}</p>
+                <p class="timeline__note">{j.note}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Beyond work -->
+  <section id="beyond" class="section section--tinted">
+    <div class="container">
+      <header class="section__header">
+        <p class="eyebrow">Beyond work</p>
+        <h2>What keeps me curious</h2>
+      </header>
+      <div class="beyond">
+        {
+          beyond.map((b) => (
+            <article class="beyond__item">
+              <h3>{b.title}</h3>
+              <p>{b.body}</p>
+              {b.link && <a href={b.link.href}>{b.link.label} →</a>}
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Writing (appears automatically once src/content/writing has a post) -->
+  {
+    posts.length > 0 && (
+      <section id="writing" class="section container">
+        <header class="section__header">
+          <p class="eyebrow">Writing</p>
+          <h2>Notes and essays</h2>
+        </header>
+        <ul class="posts">
+          {posts.map((p) => (
+            <li>
+              <a href={`/writing/${p.id}/`}>{p.data.title}</a>
+              <p>{p.data.description}</p>
+              <time datetime={p.data.date.toISOString()}>{formatDate(p.data.date)}</time>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  <!-- Contact -->
+  <section id="contact" class="section container contact">
+    <p class="eyebrow">Contact</p>
+    <h2>Let’s talk</h2>
+    <p>I’m always glad to talk about data and AI roles, responsible AI, learning science, or a project we could build together. I also consult on data and AI/ML for research labs and early-stage startups.</p>
+    <p class="contact__location">Based in {person.location}</p>
+    <div class="actions">
+      <a href={`mailto:${person.email}`} class="button"><Icon name="email" size={18} /> {person.email}</a>
+      <a href={socials.find((s) => s.key === 'linkedin')!.href} class="button button--ghost">Connect on LinkedIn</a>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,41 @@
+---
+import { getPosts } from '../lib';
+
+const posts = await getPosts();
+const links = [
+  { href: '/#mission', label: 'Mission' },
+  { href: '/#work', label: 'Work' },
+  { href: '/#skills', label: 'Skills' },
+  { href: '/#about', label: 'About' },
+  { href: '/#beyond', label: 'Beyond work' },
+  ...(posts.length ? [{ href: '/#writing', label: 'Writing' }] : []),
+  { href: '/cv.html', label: 'CV' },
+];
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="/" class="site-header__name">Souvik Mandal</a>
+
+    <nav class="site-nav site-nav--wide" aria-label="Main">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+      <a href="/#contact" class="button button--small">Contact</a>
+    </nav>
+
+    <details class="site-nav site-nav--narrow">
+      <summary>Menu</summary>
+      <nav aria-label="Main">
+        {links.map((l) => <a href={l.href}>{l.label}</a>)}
+        <a href="/#contact">Contact</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<script>
+  // Close the mobile menu after picking a section so it doesn't cover the page.
+  const menu = document.querySelector<HTMLDetailsElement>('.site-nav--narrow');
+  menu?.addEventListener('click', (e) => {
+    if ((e.target as Element).closest('a')) menu.open = false;
+  });
+</script>
