@@ -1,0 +1,16 @@
+{
+  "name": "souvikmandal-info",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && sh scripts/assemble.sh",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@fontsource-variable/source-serif-4": "^5.3.0",
+    "astro": "^7.3.5",
+    "sharp": "^0.35.5",
+    "simple-icons": "^16.33.0"
+  }
+}
