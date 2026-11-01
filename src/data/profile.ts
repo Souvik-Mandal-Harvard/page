@@ -5,10 +5,10 @@
 
 export const person = {
   name: 'Souvik Mandal',
-  headline: 'I build scalable, trustworthy data and AI solutions to real-world problems.',
-  roles: ['Researcher', 'Educator', 'Data Scientist', 'Data engineer'],
+  headline: 'I build scalable, trustworthy data and AI solutions for real-world problems.',
+  roles: ['Researcher', 'Educator', 'Data Scientist', 'Data Engineer'],
   summary:
-    'I am an academic researcher turned technologist, focused on making education ready for a rapidly changing world by connecting learners, teachers, and technology. I hold a PhD in quantitative behavioral sciences, spent 5+ years in research and teaching at Harvard, and led data engineering and AI architecture for 2 years at an Ed-Tech platform with 65M+ global users.',
+    'I am an academic researcher turned technologist, connecting behavioral science, education, and production AI. My experience includes a PhD in quantitative behavioral sciences, more than five years of research and teaching at Harvard, and two years leading data engineering and AI architecture at <a href="https://www.labxchange.org/">LabXchange</a>, an online education platform with a 65M+ global userbase. My focus is building technology that helps people learn, solve problems, and adapt to change.',
   email: 'souvik_mandal@harvard.edu',
   location: 'Boston, MA, USA',
   site: 'https://souvikmandal.info',
@@ -28,18 +28,18 @@ export const whatICareAbout = {
   closing: '…through data and AI.',
   // Each label links to the part of the page that backs it up.
   areas: [
-    { label: 'Quality Education', line: 'through which learners become thinkers, explorers and problem-solvers.', href: '#work' },
-    { label: 'Health', line: 'connecting health requirements with researchers, providers, insurers, pharma and public agencies.', href: '#yogis-bliss' },
-    { label: 'Climate Resilience', line: 'protecting ecosystems at risk, connecting communities, researchers, conservation groups, governments and industry.', href: '#climate' },
+    { label: 'Quality Education', line: 'through which learners become thinkers, explorers and problem-solvers, prepared for the rapidly changing world.'},
+    { label: 'Health', line: 'connecting health requirements with researchers, providers, insurers, pharma and public agencies.' },
+    { label: 'Climate Resilience', line: 'connecting environmental evidence with decisions that protect ecosystems, bridging communities, researchers, conservation groups, industry, and governments.' },
   ],
 };
 
 // Shown at the top of "Selected work": each label links to its case study.
 export const workAreas = [
-  { label: 'Education Technology', line: 'That serves learners, educators, and policymakers, combining behavioral science, data science, and AI/ML.', href: '#ed-tech' },
+  { label: 'Education Technology', line: 'Building tools and systems for learners, educators, and policymakers, combining behavioral science, data science, and AI/ML.', href: '#ed-tech' },
   { label: 'Teaching & Training', line: 'Teaching research methods and problem-solving using data and AI/ML. Training educators on effective use of AI.', href: '#course' },
   { label: 'Research', line: 'Focused on learning, decision-making, and cooperation using data science, computer vision, and other AI/ML workflows.', href: '#research' },
-  { label: 'AI-native Startups', line: 'Building internal knowledge-enabled, multi-agent, and on-device AI products, now in use by alpha users.', href: '#ventures' },
+  { label: 'AI-native Startups', line: 'Building multi-agent, and on-device AI products grounded in users’ own information, now in use by alpha users.', href: '#ventures' },
 ];
 
 export interface CaseStudy {
@@ -72,7 +72,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'Interest-driven, interdisciplinary learning for real-world problem-solving',
     vision: [
       'I am a proponent of learning through solving problems and answering questions that learners are interested in. This approach connects knowledge and skills across disciplines, sustains engagement and develops transferable skills, judgment, and agency to tackle unfamiliar problems. This adaptability to novel contexts is especially crucial in this rapidly changing world.',
-      'While technology has expanded access to educational content, learning experiences too often remain fragmented into disconnected subjects, with limited opportunities to apply the learning to the interest of the learners. AI grounded in carefully curated educational resources offers an opportunity to organize learning around individual interests and practical problem-solving, connecting foundational knowledge with inquiry and critical thinking. Combining my expertise in behavioral science, pedagogy, data, and AI/ML, I build tools across the education ecosystem - for learners, educators, and policymakers.'
+      'While technology has expanded access to educational content, learning experiences too often remain fragmented into separate subjects, with limited opportunities to apply the learning to the interest of the learners. AI grounded in carefully curated educational resources offers an opportunity to organize learning around individual interests and practical problem-solving, connecting foundational knowledge with inquiry and critical thinking. Combining my expertise in behavioral science, pedagogy, data, and AI/ML, I build tools that support interest-based learning, teaching, and educational decision-making.'
     ],
     experience: {
       label: 'Experience in Ed-Tech',
@@ -86,8 +86,8 @@ export const caseStudies: CaseStudy[] = [
     category: 'Teaching & Training',
     title: 'Learning through solving "your" problems and finding answers to "your" questions',
     vision: [
-      'I bring my learning philosophy to my teaching in <a href="/teaching-learning/ls100/">Computational Behavioral Sciences</a>, a course I developed and lead at Harvard University. In this course, students start from their own question about behavior, and learn the research methods, computational thinking, data science and applied AI/ML to answer it, building domain knowledge along the way. All the course matrials including codes are freely available on <a href ="https://github.com/Souvik-Mandal-Harvard/Computational-Behavioral-Sciences_LS100_Harvard">GitHub</a>.',
-      'With information and generative AI at everyone’s fingertips, educators can no longer serve just as sources of information. They must teach problem-solving: constructing logic, collaborating, and finding, evaluating and assimilating information. I co-designed and delivered training for about 8,000 educators in India through LabXchange, and I regularly lead workshops on the changing role of educators in the age of AI. I plan to take this hands-on approach to collaborative learning, with teams mixed across countries rather than competing as national blocks.',
+      'I bring my learning philosophy into practice in <a href="/teaching-learning/ls100/">Computational Behavioral Sciences</a>, a course I developed and lead at Harvard University. In this course, students start from their own question about behavior, and learn the research methods, computational thinking, data science and applied AI/ML to answer it, building domain knowledge along the way. All the course matrials including code are freely available on <a href ="https://github.com/Souvik-Mandal-Harvard/Computational-Behavioral-Sciences_LS100_Harvard">GitHub</a>.',
+      'As information and generative AI becoming mre accessible, educators can no longer serve just as sources of information. They must teach problem-solving: framing questions, constructing logic, collaborating, and finding, evaluating and assimilating information. I co-designed and delivered training for about 8,000 educators in India through LabXchange, and I regularly lead workshops on the changing role of educators in the age of AI. I plan to take this hands-on approach to collaborative learning, with teams mixed across countries rather than competing as national blocks.',
     ],
     
     closing: '',
@@ -117,7 +117,7 @@ export const caseStudies: CaseStudy[] = [
     vision: [
       'Behavior is where biology, experience, and environment meet. I studied how individuals and collectives forage, navigate, remember, learn, make decisions, and cooperate, across wasps, ants, honey bees, and robots.',
       'My approach is quantitative. I pair field and laboratory experiments with computer vision, then analyze the results using statistical modeling, causal inference, and machine learning, including deep learning. I developed <a href="https://github.com/Souvik-Mandal-Harvard/EthoScope_GPU">Ethoscope</a>, a Python pipeline for automated, large-scale extraction of behavior from video, freely available on GitHub for academic use.',
-      'At Harvard, I led research teams, line-managing and mentoring 40+ students and project staff, from hiring and performance reviews to tracking work against deadlines and budgets.',
+      'At Harvard, I led research teams, managing and mentoring 40+ students and project staff, from hiring and performance reviews to tracking work against deadlines and budgets.',
     ],
     interests: {
       label: 'Future research interests',
@@ -158,21 +158,21 @@ export const caseStudies: CaseStudy[] = [
     category: 'AI-native Startups',
     title: 'Trustworthy AI products, built end to end',
     vision: [
-      'AI products that handle personal data, like a career history or a live camera feed, have to earn trust by design, not by promise. I am building two, with co-engineers, both in alpha testing with invited users.',
+      'AI products that handle personal data, like a career history or a live camera feed, have to earn trust by design, not by promise. I am building two, with collaborators, both in alpha testing with invited users.',
       '<em>Founder · 2025–present</em>',
     ],
     products: [
       {
         id: 'cviable',
         name: 'CViable',
-        body: 'A multi-agent résumé, cover-letter, and mock interview studio, grounded in the user’s career record and tailored to individual jobs. An independent agent verifies every factual claim against its source before export. Users can inspect and edit every prompt steering the system.',
+        body: 'A multi-agent résumé, cover-letter, and mock interview studio, grounded in the user’s career record and tailored to individual jobs. A separate verification agent checks factual claims against the user’s source material. Users can inspect and edit every prompt steering the system.',
         skills: ['Multi-agent systems', 'Hybrid RAG', 'LLM evaluation', 'Python', 'Django', 'AWS'],
       },
       {
         id: 'yogis-bliss',
         name: 'Yogi’s Bliss',
         href: 'https://yogisbliss.com',
-        body: 'A vision-enabled, voice-first conversational AI yoga guide. Real-time pose estimation runs entirely in the browser, so user’s videos never leave their device. An on-device voice loop lets people practice without watching the screen. Safety rules are enforced in code rather than left to the language model.',
+        body: 'A vision-enabled, voice-first conversational AI yoga guide. Real-time pose estimation runs entirely in the browser, so users’ videos never leave their device. An on-device voice loop lets people practice without watching the screen. Safety rules are enforced in code rather than left to the language model.',
         skills: ['Computer vision', 'On-device ML', 'Voice AI', 'Privacy engineering', 'WebGPU', 'Progressive web apps'],
       },
     ],
@@ -223,7 +223,7 @@ export const skills = [
   },
   {
     title: 'Data Science and Statistics',
-    hook: 'Analysis that support scientific findings and business decisions.',
+    hook: 'Analyses that support scientific findings and business decisions.',
     keywords: ['Statistical modeling', 'Data preparation','Data mining', 'Causal inference', 'A/B testing', 'Survival analysis', 'Longitudinal analysis', 'Python', 'R', 'SQL', 'Data visualization'],
   },
   {
@@ -283,7 +283,7 @@ export const journey = [
   { when: '2004–09', what: 'B.S. & M.S. in Biology', where: 'University of Calcutta', note: 'Specialized in Zoology, Ecology and Biostatistics.' },
   { when: '2009–17', what: 'Ph.D. in quantitative behavioral sciences', where: 'Indian Institute of Science', note: 'Statistical modeling of learning, memory, decision-making during navigation and searching. Mentored by <a href="https://sites.google.com/view/raghavendragadagkar">Raghavendra Gadagkar</a>.'},
   { when: '2016', what: 'Visiting scientist', where: 'CRCA, Université de Toulouse', note: 'Neural and behavioral basis of cooperation in honeybees. Hosted by <a href="https://www.ibps.sorbonne-universite.fr/en/ibps/directory/16013-Martin-Giurfa">Martin Giurfa</a>.' },
-  { when: '2018–23', what: 'Postdoctoral fellow', where: 'Center for Brain Scince, Molecular and Cellular Biology, Harvard University', note: 'Developed computer vision and deep leqrning pipelines for investigating behavior in large-scale. Mentored by <a href="https://www.mcb.harvard.edu/directory/venkatesh-murthy/">Venki Murthy</a> and <a = href ="https://www.physics.harvard.edu/people/facpages/mahadevan">L. Mahadevan</a>.' },
+  { when: '2018–23', what: 'Postdoctoral fellow', where: 'Center for Brain Science, Molecular and Cellular Biology, Harvard University', note: 'Developed computer vision and deep learning pipelines for investigating behavior at scale. Mentored by <a href="https://www.mcb.harvard.edu/directory/venkatesh-murthy/">Venki Murthy</a> and <a = href ="https://www.physics.harvard.edu/people/facpages/mahadevan">L. Mahadevan</a>.' },
   { when: '2020–22 2025-', what: 'Course developer & project leader', where: 'Harvard FAS', note: 'Computational Behavioral Sciences (LS100).' },
   { when: '2023–25', what: 'Data Engineer & AI Solutions Architect', where: 'LabXchange, Harvard University', note: 'Led data and AI/ML strategy for the platform.' },
   { when: '2025–', what: 'Founder', where: 'CViable and Yogi’s Bliss', note: 'Two AI products, in alpha.' },
