@@ -143,7 +143,7 @@ export const caseStudies: CaseStudy[] = [
       ],
     },
     skills: ['Experimental design', 'Statistical modeling', 'Bayesian statistics', 'Causal inference', 'Time-series modeling', 'Computer vision', 'Deep learning', 'HPC', 'Python', 'Research team leadership', 'Line management', 'Data fusion', 'LLM pipelines', 'Remote sensing data', 'Dashboards'],
-    links: [{ label: 'Watch a museum video about my research', href: 'https://youtu.be/bPinUt7TmeA' }],
+    links: [{ label: 'Watch a video by Harvard Museum of Natural History about my research', href: 'https://youtu.be/bPinUt7TmeA' }],
     publications: true,
     media: {
       src: '/media/ant-tracking.mp4',
