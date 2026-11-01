@@ -1,4 +1,4 @@
-# Builds the Astro site, adds the CV page and the LS100 course site
+# Builds the Astro site, adds the LS100 course site
 # (scripts/assemble.sh), and publishes everything to GitHub Pages.
 # Repo Settings -> Pages -> Source must be "GitHub Actions".
 name: Deploy site to GitHub Pages
@@ -36,7 +36,7 @@ jobs:
 
       - name: Check output
         run: |
-          for f in index.html cv.html CNAME .nojekyll teaching-learning/ls100/index.html; do
+          for f in index.html CNAME .nojekyll teaching-learning/ls100/index.html; do
             test -e "dist/$f" || { echo "Missing dist/$f" >&2; exit 1; }
           done
 

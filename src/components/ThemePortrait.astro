@@ -1,6 +1,6 @@
 ---
-// The portrait swaps with the visitor's light/dark setting. The browser picks
-// the first matching <source>, so only one photo is ever downloaded.
+// The portrait swaps with the visitor's light/dark setting or the header toggle.
+// The browser picks the first matching <source>, so a page load downloads one photo.
 import { getImage } from 'astro:assets';
 import light from '../assets/portrait_lightMode.jpg';
 import dark from '../assets/portrait_darkMode.jpg';
@@ -25,8 +25,16 @@ const [darkSources, lightSources, fallback] = await Promise.all([
 ---
 
 <picture>
-  {darkSources.map((s) => <source media="(prefers-color-scheme: dark)" type={`image/${s.format}`} srcset={s.srcset} sizes={sizes} />)}
+  {darkSources.map((s) => <source data-dark media="(prefers-color-scheme: dark)" type={`image/${s.format}`} srcset={s.srcset} sizes={sizes} />)}
   {lightSources.map((s) => <source type={`image/${s.format}`} srcset={s.srcset} sizes={sizes} />)}
+  <script is:inline>
+    // A saved choice from the header toggle overrides the system setting. This runs
+    // before the <img> below, so only the matching photo is downloaded.
+    {
+      const theme = document.documentElement.dataset.theme;
+      if (theme) document.querySelectorAll('source[data-dark]').forEach((s) => (s.media = theme === 'dark' ? 'all' : 'not all'));
+    }
+  </script>
   <img
     src={fallback.src}
     srcset={fallback.srcSet.attribute}

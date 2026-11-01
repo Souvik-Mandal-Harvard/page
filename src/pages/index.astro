@@ -4,7 +4,7 @@ import Icon from '../components/Icon.astro';
 import LoopVideo from '../components/LoopVideo.astro';
 import ThemePortrait from '../components/ThemePortrait.astro';
 import { formatDate, getPosts } from '../lib';
-import { beyond, caseStudies, journey, mission, person, publications, publicationsSummary, skills, socials, toolbox } from '../data/profile';
+import { beyond, caseStudies, journey, person, publications, skills, socials, whatICareAbout, workAreas } from '../data/profile';
 
 const posts = await getPosts();
 ---
@@ -21,95 +21,139 @@ const posts = await getPosts();
       <p class="lede" set:html={person.summary} />
       <div class="actions">
         <a href="#work" class="button">See my work</a>
-        <a href="/cv.html" class="button button--ghost">View CV</a>
+        <ul class="social-links" aria-label="Find me online">
+          {
+            socials
+              .filter((s) => s.key !== 'youtube')
+              .map((s) => (
+                <li>
+                  <a href={s.href} aria-label={s.label} title={s.label}>
+                    <Icon name={s.key} />
+                  </a>
+                </li>
+              ))
+          }
+        </ul>
       </div>
-      <ul class="social-links" aria-label="Find me online">
-        {
-          socials.map((s) => (
-            <li>
-              <a href={s.href} aria-label={s.label} title={s.label}>
-                <Icon name={s.key} />
-              </a>
-            </li>
-          ))
-        }
-      </ul>
     </div>
   </section>
 
   <!-- Mission -->
-  <section id="mission" class="mission container">
+  <section id="care" class="care container">
     <p class="eyebrow">Mission</p>
-    <h2>{mission.heading}</h2>
-    <div class="mission__groups">
+    <h2>{whatICareAbout.heading}</h2>
+    <div class="work-areas">
       {
-        mission.groups.map((g) => (
-          <div class="mission__group">
-            <h3>{g.who}</h3>
-            <p>{g.what}</p>
+        whatICareAbout.areas.map((a) => (
+          <div class="work-area">
+            <h3><a href={a.href}>{a.label}</a></h3>
+            <p>{a.line}</p>
           </div>
         ))
       }
     </div>
-    <p class="mission__also">
-      <span>Also open to data &amp; AI work in</span>
-      {mission.alsoOpenTo.map((f) => <a href={f.href}>{f.label}</a>)}
-    </p>
+    <p class="care__closing">{whatICareAbout.closing}</p>
   </section>
 
-  <!-- Selected work -->
+  <!-- My work -->
   <section id="work" class="section container">
     <header class="section__header">
-      <p class="eyebrow">Selected work</p>
-      <h2>From watching ants to shipping AI products</h2>
-      <p>The thread through my work: turn messy, real-world data into systems that other people can use and trust.</p>
+      <p class="eyebrow">My work</p>
+      <h2>From modeling behavior to shipping AI products</h2>
+      <p>During my PhD, I worked on statistical modeling of searching, navigation, and cooperative behavior. During my postdoctoral research at Harvard, I built data and ML pipelines that automated extraction and analysis of behavioral data from videos at large scale. At <a href="https://www.labxchange.org/">LabXchange</a>, an online education platform, I took data and AI pipelines into production. Now I build data and AI solutions across the full lifecycle, from problem-framing to deploying the system.</p>
     </header>
+
+    <p class="work-areas__lead">My experience spans:</p>
+    <div class="work-areas work-areas--four">
+      {
+        workAreas.map((a) => (
+          <div class="work-area">
+            <h3><a href={a.href}>{a.label}</a></h3>
+            <p>{a.line}</p>
+          </div>
+        ))
+      }
+    </div>
 
     <div class="cases">
       {
         caseStudies.map((c) => (
           <article class:list={['case', { 'case--media': c.media }]} id={c.id}>
             <div class="case__body">
-              <p class="case__context">{c.context}</p>
+              <p class="eyebrow case__category">{c.category}</p>
               <h3>{c.title}</h3>
-              <dl class="case__story">
-                <dt>Challenge</dt>
-                <dd>{c.problem}</dd>
-                <dt>What I did</dt>
-                <dd>{c.approach}</dd>
-                <dt>Result</dt>
-                <dd>{c.outcome}</dd>
-              </dl>
-              <ul class="tags" aria-label="Skills used">
-                {c.skills.map((s) => <li>{s}</li>)}
-              </ul>
+              {c.media && <LoopVideo {...c.media} />}
+              {c.vision.map((v) => <p set:html={v} />)}
+              {c.audiences && (
+                <>
+                  <p>{c.audiences.lead}</p>
+                  <ul class="case__audiences">
+                    {c.audiences.items.map((a) => (
+                      <li>
+                        <strong>{a.who}:</strong> {a.what}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+              {c.closing && <p>{c.closing}</p>}
+              {[c.interests, c.experience, c.projects].map(
+                (list) =>
+                  list && (
+                    <div class="case__experience">
+                      <p class="case__label">{list.label}</p>
+                      <ul>
+                        {list.items.map((e) => <li set:html={e} />)}
+                      </ul>
+                    </div>
+                  ),
+              )}
+              {c.products && (
+                <div class="case__products">
+                  {c.products.map((p) => (
+                    <section class="case__product" id={p.id}>
+                      <h4>{p.href ? <a href={p.href}>{p.name}</a> : p.name}</h4>
+                      <p>{p.body}</p>
+                      <ul class="tags" aria-label={`Skills: ${p.name}`}>
+                        {p.skills.map((s) => <li>{s}</li>)}
+                      </ul>
+                    </section>
+                  ))}
+                </div>
+              )}
+              {c.skills.length > 0 && (
+                <>
+                  <p class="case__label" id={`${c.id}-skills`}>Relevant skills</p>
+                  <ul class="tags" aria-labelledby={`${c.id}-skills`}>
+                    {c.skills.map((s) => <li>{s}</li>)}
+                  </ul>
+                </>
+              )}
               {c.links.length > 0 && (
                 <p class="case__links">
                   {c.links.map((l) => <a href={l.href}>{l.label} →</a>)}
                 </p>
               )}
+              {c.publications && (
+                <details class="publications">
+                  <summary>Selected publications</summary>
+                  <ol>
+                    {publications.map((p) => (
+                      <li>
+                        {p.cite}. <a href={p.href}>{p.title}</a>. <em>{p.venue}</em>
+                      </li>
+                    ))}
+                  </ol>
+                  <p>
+                    Full list on <a href={socials.find((s) => s.key === 'scholar')!.href}>Google Scholar</a>. * joint first authors.
+                  </p>
+                </details>
+              )}
             </div>
-            {c.media && <LoopVideo {...c.media} />}
           </article>
         ))
       }
     </div>
-
-    <details class="publications">
-      <summary>Selected publications</summary>
-      <ol>
-        {
-          publications.map((p) => (
-            <li>
-              {p.cite}. <a href={p.href}>{p.title}</a>. <em>{p.venue}</em>
-            </li>
-          ))
-        }
-      </ol>
-      <p>
-        {publicationsSummary} Full list on <a href={socials.find((s) => s.key === 'scholar')!.href}>Google Scholar</a>. * joint first authors.
-      </p>
-    </details>
   </section>
 
   <!-- Transferable skills -->
@@ -117,29 +161,26 @@ const posts = await getPosts();
     <div class="container">
       <header class="section__header">
         <p class="eyebrow">Transferable skills</p>
-        <h2>What I bring, and where it fits</h2>
-        <p>Every skill below has been tested on real projects. Here is the evidence, and the kinds of teams it carries over to.</p>
+        <h2>Skills built across science, education, and AI</h2>
       </header>
 
       <div class="skills">
         {
           skills.map((s) => (
-            <article class="skill">
-              <h3>{s.skill}</h3>
-              <p>{s.proof}</p>
-              <p class="skill__fields">
-                <span class="visually-hidden">Applies to: </span>
-                {s.fields.join(' · ')}
-              </p>
-            </article>
+            <details class="skill">
+              <summary>
+                <h3>{s.title}</h3>
+              </summary>
+              <div class="skill__body">
+                <p>{s.hook}</p>
+                <ul class="tags" aria-label={`Keywords: ${s.title}`}>
+                  {s.keywords.map((k) => <li>{k}</li>)}
+                </ul>
+              </div>
+            </details>
           ))
         }
       </div>
-
-      <h3 class="toolbox__title">Toolbox</h3>
-      <ul class="tags tags--large">
-        {toolbox.map((t) => <li>{t}</li>)}
-      </ul>
     </div>
   </section>
 
@@ -147,19 +188,16 @@ const posts = await getPosts();
   <section id="about" class="section container about">
     <div class="about__story">
       <p class="eyebrow">About</p>
-      <h2>Why I do this</h2>
+      <h2>My vision</h2>
       <p>
-        I dream of a world where everyone has equal access to knowledge, opportunity and justice, where all life is treated with dignity, and where growth works with nature instead of against it. I believe making
-        high-quality, relevant education available to everyone is the most sustainable way to get there.
+        I dream of a just world where all life is treated with dignity and growth works with nature instead of against it. I believe making high-quality, relevant education available to everyone is the most sustainable way to get
+        there.
       </p>
       <p>
-        Formal education has barely changed in centuries, and learning outcomes are <a href="https://www.unicef.org/reports/state-global-education-crisis">falling for much of the world</a>. Too often, what students are taught doesn’t
-        match what they want to learn, or what they will need. I want to help build an education system that sparks curiosity, crosses subject boundaries and prepares people for real problems, backed by what research tells us about
-        how people learn.
+        Learning outcomes are <a href="https://www.unicef.org/reports/state-global-education-crisis">falling for much of the world</a>. Too often, what students are taught doesn’t match what they want to learn, or what they will need.
+        Education should spark curiosity, cross subject boundaries and prepare people for real problems, backed by what research tells us about how people learn.
       </p>
-      <blockquote>
-        <p>Tech and AI can replace the repetitive tasks of teachers, but not teachers. We can use technology to help teachers do what they love: teach.</p>
-      </blockquote>
+      <p class="about__closing">Tech and AI can replace the repetitive tasks of teachers, but not teachers. We can use technology to help teachers do what they love: teach.</p>
     </div>
 
     <div class="about__journey">
@@ -172,7 +210,7 @@ const posts = await getPosts();
               <div>
                 <p class="timeline__what">{j.what}</p>
                 <p class="timeline__where">{j.where}</p>
-                <p class="timeline__note">{j.note}</p>
+                <p class="timeline__note" set:html={j.note} />
               </div>
             </li>
           ))
@@ -186,7 +224,7 @@ const posts = await getPosts();
     <div class="container">
       <header class="section__header">
         <p class="eyebrow">Beyond work</p>
-        <h2>What keeps me curious</h2>
+        <h2>The other side of me</h2>
       </header>
       <div class="beyond">
         {
@@ -194,7 +232,6 @@ const posts = await getPosts();
             <article class="beyond__item">
               <h3>{b.title}</h3>
               <p>{b.body}</p>
-              {b.link && <a href={b.link.href}>{b.link.label} →</a>}
             </article>
           ))
         }

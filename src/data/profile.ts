@@ -5,12 +5,12 @@
 
 export const person = {
   name: 'Souvik Mandal',
-  headline: 'I build scalable, trustworthy data and AI solutions addressing real-world problems.',
+  headline: 'I build scalable, trustworthy data and AI solutions to real-world problems.',
   roles: ['Researcher', 'Educator', 'Data Scientist', 'Data engineer'],
   summary:
-    'I bring a scientist’s rigor to every system I build, shaped by a PhD in quantitative behavioral sciences, five years of research at Harvard, and two years leading data and generative-AI work at <a href="https://www.labxchange.org/">LabXchange</a>.',
-  email: 'drsouvikmandal@gmail.com',
-  location: 'Boston, MA',
+    'I am an academic researcher turned technologist, focused on making education ready for a rapidly changing world by connecting learners, teachers, and technology. I hold a PhD in quantitative behavioral sciences, spent 5+ years in research and teaching at Harvard, and led data engineering and AI architecture for 2 years at an Ed-Tech platform with 65M+ global users.',
+  email: 'souvik_mandal@harvard.edu',
+  location: 'Boston, MA, USA',
   site: 'https://souvikmandal.info',
 };
 
@@ -23,28 +23,43 @@ export const socials: { key: SocialKey; label: string; href: string }[] = [
   { key: 'youtube', label: 'YouTube', href: 'https://www.youtube.com/channel/UCk1sCggR-UKHIWkkbqUuM-g' },
 ];
 
-export const mission = {
-  heading: 'Accessible education that turns learners into problem-solvers',
-  groups: [
-    { who: 'Students', what: 'Teaching my Harvard course, and learning from them.' },
-    { who: 'Educators', what: 'Training them to use data and AI well.' },
-    { who: 'Administrators & policymakers', what: 'Turning data into strategy.' },
-  ],
-  // Each field links to the case study that backs it up.
-  alsoOpenTo: [
-    { label: 'Equitable opportunity', href: '#ventures' },
-    { label: 'Public health', href: '#ventures' },
-    { label: 'Climate', href: '#climate' },
+export const whatICareAbout = {
+  heading: 'Equitable access and opportunity for…',
+  closing: '…through data and AI.',
+  // Each label links to the part of the page that backs it up.
+  areas: [
+    { label: 'Quality Education', line: 'through which learners become thinkers, explorers and problem-solvers.', href: '#work' },
+    { label: 'Health', line: 'connecting health requirements with researchers, providers, insurers, pharma and public agencies.', href: '#yogis-bliss' },
+    { label: 'Climate Resilience', line: 'protecting ecosystems at risk, connecting communities, researchers, conservation groups, governments and industry.', href: '#climate' },
   ],
 };
 
+// Shown at the top of "Selected work": each label links to its case study.
+export const workAreas = [
+  { label: 'Education Technology', line: 'That serves learners, educators, and policymakers, combining behavioral science, data science, and AI/ML.', href: '#ed-tech' },
+  { label: 'Teaching & Training', line: 'Teaching research methods and problem-solving using data and AI/ML. Training educators on effective use of AI.', href: '#course' },
+  { label: 'Research', line: 'Focused on learning, decision-making, and cooperation using data science, computer vision, and other AI/ML workflows.', href: '#research' },
+  { label: 'AI-native Startups', line: 'Building internal knowledge-enabled, multi-agent, and on-device AI products, now in use by alpha users.', href: '#ventures' },
+];
+
 export interface CaseStudy {
   id: string;
+  // Shown above the case study; matches a label in workAreas.
+  category: string;
   title: string;
-  context: string;
-  problem: string;
-  approach: string;
-  outcome: string;
+  // Vision paragraphs (may contain HTML links), then the experience behind them.
+  vision: string[];
+  // Optional lead-in and list of who the work serves, then a closing line.
+  audiences?: { lead: string; items: { who: string; what: string }[] };
+  closing?: string;
+  // Items may contain HTML links.
+  interests?: { label: string; items: string[] };
+  experience?: { label: string; items: string[] };
+  projects?: { label: string; items: string[] };
+  // Products shown side by side, each with its own skills. Used instead of the shared skills.
+  products?: { id: string; name: string; href?: string; body: string; skills: string[] }[];
+  // Closes the case study with the selected publications.
+  publications?: boolean;
   skills: string[];
   links: { label: string; href: string }[];
   media?: { src: string; poster: string; width: number; height: number; caption: string };
@@ -52,93 +67,121 @@ export interface CaseStudy {
 
 export const caseStudies: CaseStudy[] = [
   {
-    id: 'labxchange',
-    title: 'Data and generative AI for a global learning platform',
-    context: 'LabXchange, Harvard University · Data Engineer & AI Solutions Architect, 2023–2025',
-    problem:
-      'A free science-learning platform with 32,000+ assets across text, video, audio, images and virtual labs, and no existing machine-learning function to build on.',
-    approach:
-      'Started LabXchange’s AI/ML work as the sole practitioner, then trained engineers into it. Architected multi-agent LLM workflows for semantic search, recommendation and content alignment, with fine-tuned models, custom RAG pipelines, and an evaluation and safety pipeline tracking retrieval quality, hallucination rate, latency, toxicity and drift. Owned 10+ production pipelines processing 100,000–500,000 rows a day, reporting to the CTO, faculty and managing director.',
-    outcome:
-      'Automated ingestion from 100+ partner sites and YouTube channels cut manual handling of video content by about 80%. Co-authored LabXchange’s responsible-AI policies, and led the platform’s expansion in India, including training for about 8,000 educators.',
-    skills: ['Multi-agent LLMs', 'RAG', 'LLM evaluation', 'Data engineering', 'AI governance', 'Stakeholder leadership'],
-    links: [{ label: 'LabXchange', href: 'https://www.labxchange.org/' }],
-  },
-  {
-    id: 'ventures',
-    title: 'Trustworthy AI products, built end to end',
-    context: 'Founder & engineer · 2025–present · in alpha testing',
-    problem: 'AI products that handle personal data, like a career history or a live camera feed, have to earn trust by design, not by promise.',
-    approach:
-      'CViable is a résumé and cover-letter studio run by 11 specialised agents. Hybrid retrieval (pgvector and BM25) is restricted to the user’s own documents, and an independent audit agent checks every claim against the source before export. Yogi’s Bliss is a voice-first yoga guide: real-time pose estimation and speech run entirely in the browser (MediaPipe, ONNX Runtime Web, WebGPU, Whisper), so camera frames are never uploaded or stored.',
-    outcome:
-      'Both are in testing with invited alpha users, each with co-engineers. Everything from architecture and AWS deployment to evaluation harnesses and CI-gated test suites is owned in-house.',
-    skills: ['Agentic AI', 'Hybrid RAG', 'On-device ML', 'Privacy engineering', 'AWS', 'Full stack'],
+    id: 'ed-tech',
+    category: 'Education Technology',
+    title: 'Interest-driven, interdisciplinary learning for real-world problem-solving',
+    vision: [
+      'I am a proponent of learning through solving problems and answering questions that learners are interested in. This approach connects knowledge and skills across disciplines, sustains engagement and develops transferable skills, judgment, and agency to tackle unfamiliar problems. This adaptability to novel contexts is especially crucial in this rapidly changing world.',
+      'While technology has expanded access to educational content, learning experiences too often remain fragmented into disconnected subjects, with limited opportunities to apply the learning to the interest of the learners. AI grounded in carefully curated educational resources offers an opportunity to organize learning around individual interests and practical problem-solving, connecting foundational knowledge with inquiry and critical thinking. Combining my expertise in behavioral science, pedagogy, data, and AI/ML, I build tools across the education ecosystem - for learners, educators, and policymakers.'
+    ],
+    experience: {
+      label: 'Experience in Ed-Tech',
+      items: ['Data Engineer & AI Solutions Architect, <a href="https://www.labxchange.org/">LabXchange</a>, Harvard University · 2023–2025'],
+    },
+    skills: ['Cognitive Science', 'Curriculum & Instructional Design', 'Interdisciplinary Learning', 'Data Infrastructure & Analytics', 'Generative AI', 'Educator training'],
     links: [],
   },
   {
     id: 'course',
-    title: 'An open course in computational behavioral science',
-    context: 'Harvard FAS · Course developer & project leader, 2020–22 and 2025–present',
-    problem:
-      'Students with compelling questions about behavior often have little or no programming experience, which puts modern measurement tools out of reach.',
-    approach:
-      'Designed LS100, a four-credit research-based course blending experimental design, data science, computer vision and AI/ML, using backward design and built to accessibility standards. Wrote an open-source guide to building Raspberry Pi computer-vision cameras for pose estimation with MediaPipe and YOLO, and built responsible AI and reproducibility into the assignments.',
-    outcome:
-      'Every guide, notebook and dataset is free and open. A small, retrospective comparison of cohorts from before and after generative AI (preliminary, unpublished) was reported to Harvard’s Office of Undergraduate Education and reshaped how the course assesses research framing.',
-    skills: ['Instructional design', 'Computer vision', 'Python', 'Responsible AI', 'Education research'],
-    links: [
-      { label: 'Course website', href: '/teaching-learning/ls100/' },
-      {
-        label: 'Course on GitHub',
-        href: 'https://github.com/Souvik-Mandal-Harvard/Computational-Behavioral-Sciences_LS100_Harvard',
-      },
+    category: 'Teaching & Training',
+    title: 'Learning through solving "your" problems and finding answers to "your" questions',
+    vision: [
+      'I bring my learning philosophy to my teaching in <a href="/teaching-learning/ls100/">Computational Behavioral Sciences</a>, a course I developed and lead at Harvard University. In this course, students start from their own question about behavior, and learn the research methods, computational thinking, data science and applied AI/ML to answer it, building domain knowledge along the way. All the course matrials including codes are freely available on <a href ="https://github.com/Souvik-Mandal-Harvard/Computational-Behavioral-Sciences_LS100_Harvard">GitHub</a>.',
+      'With information and generative AI at everyone’s fingertips, educators can no longer serve just as sources of information. They must teach problem-solving: constructing logic, collaborating, and finding, evaluating and assimilating information. I co-designed and delivered training for about 8,000 educators in India through LabXchange, and I regularly lead workshops on the changing role of educators in the age of AI. I plan to take this hands-on approach to collaborative learning, with teams mixed across countries rather than competing as national blocks.',
     ],
+    
+    closing: '',
+    experience: {
+      label: 'Experience in Teaching & Training',
+      items: [
+        'Course Developer & Project Leader, <a href="/teaching-learning/ls100/">Computational Behavioral Sciences (LS100)</a>, Harvard University · 2020–2022, 2025–present',
+        'Co-designed and delivered training program on "Teaching in the Age of AI" for about 8,000 school teachers in India through <a href="https://about.labxchange.org/blog/iisc-master-teacher-trainers">LabXchange</a> · 2024–2025',
+        '<a href="https://hmsc.harvard.edu/science-education-partners/">Harvard Science Education Partner </a> · 2022–2024',
+        'Teaching Assistant, Harvard University (2018) and Indian Institute of Science (2011–2013)',
+      ],
+    },
+    skills: ['Instructional design', 'Research methods', 'Computer vision', 'Responsible AI', 'Open educational resources', 'Educator training'],
+    links: [],
     media: {
-      src: '/media/rowing-tracking.mp4',
-      poster: '/media/rowing-tracking-poster.webp',
-      width: 400,
-      height: 214,
-      caption: 'Pose estimation on a rowing machine, an example from the course.',
+      src: '/media/fencing-dashboard.mp4',
+      poster: '/media/fencing-dashboard-poster.webp',
+      width: 960,
+      height: 540,
+      caption: 'Pose estimation turned into a fencing analytics dashboard, an example from the course. Shown in slow motion.',
     },
   },
   {
-    id: 'behavior-tracking',
-    title: 'Teaching computers to watch behavior',
-    context: 'Harvard Center for Brain Science · Postdoctoral fellow, 2018–2023',
-    problem:
-      'Studying collective behavior at scale meant hours of manual video annotation: slow, hard to reproduce and impossible to scale.',
-    approach:
-      'Built deep-learning pipelines, with CNNs for computer vision and GNNs for interaction networks, to automate data collection and analysis, deployed on cloud and HPC clusters. Applied Bayesian statistics, causal inference and time-series models, and released open-source Python packages for behavioral analysis.',
-    outcome:
-      'Received the Harvard Brain Science Initiative Postdoc Pioneers Grant (2022) as the initiating researcher, for a project in an area new to the host lab. Joint first author of an eLife paper on ant and robot collectives. Mentored and line-managed 40+ students and project staff.',
-    skills: ['Computer vision', 'Deep learning', 'HPC', 'Bayesian statistics', 'Line management'],
-    links: [
-      { label: 'ES_GPU on GitHub', href: 'https://github.com/Souvik-Mandal-Harvard/ES_GPU' },
-      { label: 'eLife paper', href: 'https://elifesciences.org/articles/79638' },
+    id: 'research',
+    category: 'Research',
+    title: 'Understanding behavior across species and scales',
+    vision: [
+      'Behavior is where biology, experience, and environment meet. I studied how individuals and collectives forage, navigate, remember, learn, make decisions, and cooperate, across wasps, ants, honey bees, and robots.',
+      'My approach is quantitative. I pair field and laboratory experiments with computer vision, then analyze the results using statistical modeling, causal inference, and machine learning, including deep learning. I developed <a href="https://github.com/Souvik-Mandal-Harvard/EthoScope_GPU">Ethoscope</a>, a Python pipeline for automated, large-scale extraction of behavior from video, freely available on GitHub for academic use.',
+      'At Harvard, I led research teams, line-managing and mentoring 40+ students and project staff, from hiring and performance reviews to tracking work against deadlines and budgets.',
     ],
+    interests: {
+      label: 'Future research interests',
+      items: [
+        'Large-scale behavioral science of individual, collective, and cooperative behavior in humans and other social animals',
+        'Cognition and learning in the context of education',
+        'Behavior in personal and public health',
+      ],
+    },
+    experience: {
+      label: 'Experience in Academic Research',
+      items: [
+        'Postdoctoral Fellow / Research Associate, <a href="https://cbs.fas.harvard.edu/">Center for Brain Science</a> / <a href="https://www.mcb.harvard.edu/">Molecular & Cellular Biology</a>, Harvard University · 2018–2023',
+        '<a href="https://brain.harvard.edu/grants/grant/?slug=postdoc-pioneers-grant-program">Harvard Brain Science Initiative Postdoc Pioneers Grant</a>, initiating researcher and grant manager · 2022',
+        'Visiting Scientist, <a href="https://www.univ-tlse3.fr/structures-de-recherche/centre-de-recherches-sur-la-cognition-animale">Centre de Recherches sur la Cognition Animale</a>, Université de Toulouse · 2016',
+        'Ph.D., Quantitative Behavioral Sciences, <a href="https://www.iisc.ac.in/">Indian Institute of Science</a> · 2009–2017',
+        'National winner, EURAXESS science communication competition · 2015',
+      ],
+    },
+    projects: {
+      label: 'Data Science Project',
+      items: [
+        '<em><a id="climate" href="https://github.com/Souvik-Mandal-Harvard/climate-ghgrp-data-science">How credible are corporate climate pledges?</a></em> · 2026. A credibility score for the top 50 U.S. power-sector parent companies, fusing SEC 10-K filings and Net Zero Tracker pledges (scored with a multi-LLM pipeline), EPA GHGRP and CEMS emissions data, and Climate TRACE satellite estimates, explored through an interactive dashboard.',
+      ],
+    },
+    skills: ['Experimental design', 'Statistical modeling', 'Bayesian statistics', 'Causal inference', 'Time-series modeling', 'Computer vision', 'Deep learning', 'HPC', 'Python', 'Research team leadership', 'Line management', 'Data fusion', 'LLM pipelines', 'Remote sensing data', 'Dashboards'],
+    links: [{ label: 'Watch a museum video about my research', href: 'https://youtu.be/bPinUt7TmeA' }],
+    publications: true,
     media: {
       src: '/media/ant-tracking.mp4',
       poster: '/media/ant-tracking-poster.webp',
       width: 720,
       height: 720,
-      caption: 'Automated pose tracking of ants, shown at 4× speed. Each colour is one ant.',
+      caption: 'Automated pose tracking of ants.',
     },
   },
   {
-    id: 'climate',
-    title: 'How credible are corporate climate pledges?',
-    context: 'Independent data-science project · 2026',
-    problem: 'Power companies publish climate pledges, but checking them against what they actually emit means stitching together incompatible public datasets.',
-    approach:
-      'Fused SEC 10-K filings and Net Zero Tracker pledges (scored with a multi-LLM pipeline), EPA GHGRP and CEMS emissions data, and Climate TRACE satellite estimates for the top 50 U.S. power-sector parent companies.',
-    outcome: 'A single, decomposable credibility score per company, explored through a self-contained interactive dashboard.',
-    skills: ['Data fusion', 'LLM pipelines', 'Remote sensing data', 'Dashboards'],
-    links: [{ label: 'Code on GitHub', href: 'https://github.com/Souvik-Mandal-Harvard/climate-ghgrp-data-science' }],
+    id: 'ventures',
+    category: 'AI-native Startups',
+    title: 'Trustworthy AI products, built end to end',
+    vision: [
+      'AI products that handle personal data, like a career history or a live camera feed, have to earn trust by design, not by promise. I am building two, with co-engineers, both in alpha testing with invited users.',
+      '<em>Founder · 2025–present</em>',
+    ],
+    products: [
+      {
+        id: 'cviable',
+        name: 'CViable',
+        body: 'A multi-agent résumé, cover-letter, and mock interview studio, grounded in the user’s career record and tailored to individual jobs. An independent agent verifies every factual claim against its source before export. Users can inspect and edit every prompt steering the system.',
+        skills: ['Multi-agent systems', 'Hybrid RAG', 'LLM evaluation', 'Python', 'Django', 'AWS'],
+      },
+      {
+        id: 'yogis-bliss',
+        name: 'Yogi’s Bliss',
+        href: 'https://yogisbliss.com',
+        body: 'A vision-enabled, voice-first conversational AI yoga guide. Real-time pose estimation runs entirely in the browser, so user’s videos never leave their device. An on-device voice loop lets people practice without watching the screen. Safety rules are enforced in code rather than left to the language model.',
+        skills: ['Computer vision', 'On-device ML', 'Voice AI', 'Privacy engineering', 'WebGPU', 'Progressive web apps'],
+      },
+    ],
+    skills: [],
+    links: [],
   },
 ];
 
-export const publicationsSummary = '10 peer-reviewed papers, including PNAS, eLife and Proceedings of the Royal Society B.';
 
 export const publications = [
   {
@@ -175,77 +218,85 @@ export const publications = [
 
 export const skills = [
   {
-    skill: 'Generative AI & LLM systems',
-    proof: 'Multi-agent LLM workflows over 32,000+ learning assets, plus an 11-agent product with hybrid RAG, a grounding audit and an evaluation harness.',
-    fields: ['AI product teams', 'Ed-tech', 'Knowledge management'],
+    title: 'Research and Scientific Inquiry',
+    hook: 'Turning open questions into testable designs and published evidence.',
+    keywords: ['Research design', 'Experimental design', 'Quantitative behavioral science', 'Scientific writing', 'Technical writing', 'Peer review', 'User Analytics'],
   },
   {
-    skill: 'Data engineering & analytics',
-    proof: '10+ production pipelines at 100,000–500,000 rows a day, terabyte-scale data services, 30+ statistical reports and 10+ live dashboards supporting platform decisions.',
-    fields: ['Any data-driven team', 'Ed-tech', 'Biotech'],
+    title: 'Data Science and Statistics',
+    hook: 'Analysis that support scientific findings and business decisions.',
+    keywords: ['Statistical modeling', 'Data preparation','Data mining', 'Causal inference', 'A/B testing', 'Survival analysis', 'Longitudinal analysis', 'Python', 'R', 'SQL', 'Data visualization'],
   },
   {
-    skill: 'Computer vision & machine learning',
-    proof: 'CNN and GNN behavior pipelines on HPC, in-browser pose estimation with WebGPU, and the judgment to ship a classical model when it beats a generative one.',
-    fields: ['Health tech', 'Robotics', 'Sports & fitness', 'Agritech'],
+    title: 'Machine Learning',
+    hook: 'Predictive models that are measured, explained, and deployed.',
+    keywords: ['Supervised learning', 'Unsupervised learning', 'CNNs, RNNs, GNNs', 'Computer vision', 'Time-series modeling', 'PyTorch', 'TensorFlow', 'scikit-learn', 'MLflow'],
   },
   {
-    skill: 'Responsible AI & governance',
-    proof: 'Co-authored LabXchange’s responsible-AI policies, sat on its AI ethics committee and data governance board, and owned an ~80-seat enterprise OpenAI deployment.',
-    fields: ['Regulated industries', 'Enterprise IT', 'Public sector'],
+    title: 'Generative AI and Agentic Systems',
+    hook: 'LLM and multi-agent systems grounded in real data, with guardrails and evaluation built in.',
+    keywords: ['Vector, graph, and hybrid RAG', 'Multi-agent orchestration', 'MCP', 'Fine-tuning (LoRA, QLoRA)', 'Prompt and context engineering', 'Guardrails', 'Evaluation', 'AWS Bedrock'],
   },
   {
-    skill: 'Research & experiment design',
-    proof: 'Research since 2007 and 10 peer-reviewed papers. Ran a mixed-methods study across the USA, Kenya and India, with ~250 interview and focus-group participants.',
-    fields: ['UX research', 'Product analytics', 'Biotech', 'Policy'],
+    title: 'Data Engineering',
+    hook: 'Reliable pipelines and data stores for messy, multimodal data.',
+    keywords: ['ETL pipelines', 'Apache Spark', 'Kafka', 'PostgreSQL', 'Vector databases', 'Neo4j', 'Databricks', 'Snowflake', 'dbt', 'AWS', 'GCP', 'Azure'],
   },
-  {
-    skill: 'Teaching, leadership & communication',
-    proof: 'A Harvard course since 2020, ~8,000 educators trained, 40+ students line-managed, and regular briefings to the CTO and faculty. FameLab national finalist.',
-    fields: ['Learning & development', 'Consulting', 'Developer relations'],
-  },
-];
 
-export const toolbox = [
-  'Python', 'R', 'SQL', 'PyTorch', 'TensorFlow', 'scikit-learn', 'XGBoost', 'pandas',
-  'PostgreSQL + pgvector', 'Spark', 'Databricks', 'AWS', 'GCP', 'Docker', 'GitHub Actions',
-  'Django', 'FastAPI', 'Anthropic Claude', 'OpenAI', 'Hugging Face', 'MediaPipe', 'ONNX Runtime',
+  {
+    title: 'Software Engineering and DevOps',
+    hook: 'From prototype to production, across front end, back end, and cloud.',
+    keywords: ['FastAPI', 'Django', 'Flask', 'JavaScript', 'Docker', 'Kubernetes', 'CI/CD', 'Git', 'Agile', 'AI-assisted development'],
+  },
+  {
+    title: 'Solution Architecture and Technical Leadership',
+    hook: 'Setting the technical direction, then building the people, standards, and governance to carry it.',
+    keywords: ['Architecture decision records', 'KPI ownership', 'AI strategy advising', 'AI governance', 'Vendor evaluation', 'Executive briefings', 'Code review'],
+  },
+  {
+    title: 'Education Technology and Instructional Design',
+    hook: 'Connecting learning design, data, and AI on a platform serving 65M+ users.',
+    keywords: ['Instructional design', 'Learning analytics', 'Educator training', 'Curriculum alignment', 'Content recommendation', 'Content quality models',  'Accessibility', 'AI-assisted content creation'],
+  },
+  {
+    title: 'Teaching and Mentoring',
+    hook: 'Designing and teaching courses at Harvard and the Indian Institute of Science, and mentoring 40+ students.',
+    keywords: ['Student mentoring', 'Course design', 'Backward design', 'Assessment design', 'Research-based learning', 'Digital content development', 'Open educational resources'],
+  },
+  {
+    title: 'Communication and Public Outreach',
+    hook: 'Making technical work clear to scientists, leaders, policymakers, and the public.',
+    keywords: ['Technical writing', 'Public outreach', 'Stakeholder presentations', 'Fluency in six languages'],
+  },
+  {
+    title: 'Media Production',
+    hook: 'Telling stories through film, design, and AI-generated video.',
+    keywords: ['Documentary film', 'Screenwriting', 'Music production', 'Adobe suite', 'AI video generation', 'Text-to-speech', 'Instructional media'],
+  },
+  {
+    title: 'Equity and Access in Education',
+    hook: 'Keeping learning open through free tutoring, guest lectures, and open courseware.',
+    keywords: ['Free tutoring', 'K-12 talks', 'Equitable content design', 'Student fundraising', 'Open courseware'],
+  },
 ];
 
 export const journey = [
-  { when: '2007–09', what: 'B.Sc. & Master’s in Biology', where: 'University of Calcutta', note: 'Zoology, with ecology and biostatistics.' },
-  { when: '2009–17', what: 'PhD, quantitative behavioral sciences', where: 'Indian Institute of Science, with Raghavendra Gadagkar', note: 'Statistical modeling of learning, memory, decision-making and cooperation in social wasps.' },
-  { when: '2016', what: 'Visiting scientist', where: 'CRCA, Université de Toulouse', note: 'Neural and behavioral basis of cooperation in honeybees.' },
-  { when: '2018–23', what: 'Postdoctoral fellow', where: 'Harvard University', note: 'Computer vision and AI for collective behavior and decision-making.' },
-  { when: '2020–', what: 'Course developer & project leader', where: 'Harvard FAS', note: 'Computational Behavioral Sciences (LS100).' },
+  { when: '2004–09', what: 'B.S. & M.S. in Biology', where: 'University of Calcutta', note: 'Specialized in Zoology, Ecology and Biostatistics.' },
+  { when: '2009–17', what: 'Ph.D. in quantitative behavioral sciences', where: 'Indian Institute of Science', note: 'Statistical modeling of learning, memory, decision-making during navigation and searching. Mentored by <a href="https://sites.google.com/view/raghavendragadagkar">Raghavendra Gadagkar</a>.'},
+  { when: '2016', what: 'Visiting scientist', where: 'CRCA, Université de Toulouse', note: 'Neural and behavioral basis of cooperation in honeybees. Hosted by <a href="https://www.ibps.sorbonne-universite.fr/en/ibps/directory/16013-Martin-Giurfa">Martin Giurfa</a>.' },
+  { when: '2018–23', what: 'Postdoctoral fellow', where: 'Center for Brain Scince, Molecular and Cellular Biology, Harvard University', note: 'Developed computer vision and deep leqrning pipelines for investigating behavior in large-scale. Mentored by <a href="https://www.mcb.harvard.edu/directory/venkatesh-murthy/">Venki Murthy</a> and <a = href ="https://www.physics.harvard.edu/people/facpages/mahadevan">L. Mahadevan</a>.' },
+  { when: '2020–22 2025-', what: 'Course developer & project leader', where: 'Harvard FAS', note: 'Computational Behavioral Sciences (LS100).' },
   { when: '2023–25', what: 'Data Engineer & AI Solutions Architect', where: 'LabXchange, Harvard University', note: 'Led data and AI/ML strategy for the platform.' },
-  { when: '2025–', what: 'Founder & engineer', where: 'CViable and Yogi’s Bliss', note: 'Two AI products, in alpha.' },
+  { when: '2025–', what: 'Founder', where: 'CViable and Yogi’s Bliss', note: 'Two AI products, in alpha.' },
 ];
 
 export const beyond = [
   {
-    title: 'Photography',
-    body: 'Featured in Sanctuary Asia (2005) and BMC Ecology (2014), and photographer for the Indian Institute of Science’s Archives and Publications Cell.',
+    title: 'Visual arts',
+    body: 'Trained as a painter, with a six-year diploma in visual arts. My award-winning photographs have appeared in BMC Ecology and Sanctuary Asia, and I was photographer and head of documentary production for the Indian Institute of Science’s Archives and Publications Cell.',
   },
   {
-    title: 'Film',
-    body: 'Led documentary production for the IISc Archives and Publications Cell, and seminar video production for its Centre for Contemporary Studies.',
-  },
-  {
-    title: 'Painting & tabla',
-    body: 'A six-year diploma in visual arts (painting) and a diploma in tabla percussion.',
-  },
-  {
-    title: 'Science for everyone',
-    body: 'Associated Scientist with Harvard Science Education Partners (2022–24). National winner of the EURAXESS science communication competition.',
-    link: { label: 'Watch a museum video about my research', href: 'https://youtu.be/bPinUt7TmeA' },
-  },
-  {
-    title: 'Languages',
-    body: 'Fluent in English, Bangla, Hindi, Urdu, Punjabi and Bhojpuri, with working Kannada and Nepali.',
-  },
-  {
-    title: 'Community',
-    body: 'As convener of the IISc Students’ Council, coordinated 11+ committees and 35 elected members serving 5,000+ students.',
+    title: 'Music',
+    body: 'A multi-instrumentalist on tabla, guitar, and harmonica, drawn to the neuroscience of music. I have a varied taste, including Indian classical, blues, and classic rock.',
   },
 ];

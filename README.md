@@ -19,7 +19,7 @@ The **Writing** section and its nav link appear automatically once there is at l
 ```sh
 npm install
 npm run dev       # live-reloading dev server (home page only)
-npm run build     # full site into dist/, including CV and LS100
+npm run build     # full site into dist/, including LS100
 npm run preview   # serve dist/ at http://localhost:4321
 ```
 
@@ -27,7 +27,6 @@ npm run preview   # serve dist/ at http://localhost:4321
 
 `scripts/assemble.sh` copies these into `dist/` after the Astro build:
 
-- `cv.html`, `cv/` and `assets/` (the CV page still uses the old HTML5 UP template)
 - `teaching-learning/ls100/` (the MyST course site, deployed here by its own pipeline)
 - `comp_etho/guide_materials/` (old handouts; `/comp_etho` redirects to the course site)
 

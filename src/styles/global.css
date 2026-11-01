@@ -10,6 +10,8 @@
   --accent-hover: #0a5549;
   --accent-ink: #ffffff;
   --accent-soft: #e1efea;
+  --toggle-sun: none;
+  --toggle-moon: block;
 
   --serif: 'Source Serif 4 Variable', Georgia, 'Times New Roman', serif;
   --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -17,12 +19,14 @@
   --radius: 14px;
   --container: 72rem;
   --gutter: clamp(1rem, 4vw, 2.5rem);
+  --section-space: clamp(2rem, 5vw, 3rem);
 
   color-scheme: light dark;
 }
 
+/* Follows the system setting until the header toggle sets data-theme. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme='light']) {
     --bg: #111413;
     --bg-tint: #171b19;
     --surface: #1b201e;
@@ -33,7 +37,27 @@
     --accent-hover: #86d6c3;
     --accent-ink: #0b1210;
     --accent-soft: #1d2f2a;
+    --toggle-sun: block;
+    --toggle-moon: none;
   }
+}
+:root[data-theme='dark'] {
+  --bg: #111413;
+  --bg-tint: #171b19;
+  --surface: #1b201e;
+  --ink: #ecebe6;
+  --muted: #a9a49c;
+  --line: #2b312e;
+  --accent: #5fc4ad;
+  --accent-hover: #86d6c3;
+  --accent-ink: #0b1210;
+  --accent-soft: #1d2f2a;
+  --toggle-sun: block;
+  --toggle-moon: none;
+  color-scheme: dark;
+}
+:root[data-theme='light'] {
+  color-scheme: light;
 }
 
 /* ---------- Base ---------- */
@@ -218,6 +242,34 @@ video {
   text-decoration: none;
 }
 
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+.theme-toggle:hover {
+  border-color: var(--muted);
+}
+.theme-toggle__sun {
+  display: var(--toggle-sun);
+}
+.theme-toggle__moon {
+  display: var(--toggle-moon);
+}
+
 .site-nav a:not(.button) {
   color: var(--muted);
   text-decoration: none;
@@ -301,12 +353,12 @@ video {
   display: grid;
   gap: 2.5rem;
   align-items: center;
-  padding-block: clamp(2.5rem, 7vw, 5.5rem) clamp(2rem, 5vw, 3.5rem);
+  padding-block: clamp(1.25rem, 3vw, 2rem) var(--section-space);
 }
 
 .hero h1 {
-  max-width: 21ch;
-  font-size: clamp(2.1rem, 4.2vw, 3.1rem);
+  max-width: 26ch;
+  font-size: clamp(1.9rem, 3.8vw, 2.6rem);
 }
 
 .lede {
@@ -315,8 +367,8 @@ video {
   max-width: 38rem;
 }
 
-.hero .social-links {
-  margin-left: -0.6rem;
+.hero .actions {
+  align-items: center;
 }
 
 .hero__photo {
@@ -344,70 +396,46 @@ video {
 }
 
 /* ---------- Mission ---------- */
-.mission {
-  padding-block: clamp(1rem, 3vw, 2rem) clamp(3rem, 7vw, 5rem);
+.care {
+  padding-block: var(--section-space);
 }
-.mission h2 {
-  max-width: 32ch;
+.care h2 {
   margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
 }
-.mission__groups {
-  display: grid;
-  gap: 1.25rem 2rem;
+.care .work-areas {
+  margin-bottom: 0;
 }
-.mission__group {
-  border-top: 2px solid var(--ink);
-  padding-top: 1rem;
-}
-.mission__group h3 {
-  font-size: 1.25rem;
-  margin-bottom: 0.35rem;
-}
-.mission__group p {
-  color: var(--muted);
-  margin: 0;
-}
-@media (min-width: 48rem) {
-  .mission__groups {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.mission__also {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 2rem 0 0;
-}
-.mission__also span {
-  margin-right: 0.25rem;
-  color: var(--muted);
-}
-.mission__also a {
-  padding: 0.3rem 0.9rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--surface);
+.care__closing {
+  /* Same look as the section heading, so the two read as one sentence. */
+  margin: clamp(1.5rem, 4vw, 2.5rem) 0 0;
+  font-family: var(--serif);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
   color: var(--ink);
-  font-size: 0.95rem;
-  text-decoration: none;
 }
-.mission__also a:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
 /* ---------- Sections ---------- */
 .section {
-  padding-block: clamp(3.5rem, 8vw, 6rem);
+  padding-block: var(--section-space);
 }
 .section--tinted {
   background: var(--bg-tint);
-  border-block: 1px solid var(--line);
+}
+/* Divider aligned with the text. Tinted sections span the screen with their
+   container inside, so the inset is worked out from the section's own width. */
+main > section + section {
+  position: relative;
+}
+main > section + section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  inset-inline: max(var(--gutter), (100% - var(--container)) / 2 + var(--gutter));
+  height: 6px;
+  background: var(--line);
 }
 .section__header {
-  max-width: 40rem;
   margin-bottom: clamp(2rem, 5vw, 3rem);
 }
 .section__header > p:last-child {
@@ -415,10 +443,57 @@ video {
   font-size: 1.1rem;
 }
 
+/* ---------- Work areas ---------- */
+.work-areas {
+  display: grid;
+  gap: 1.25rem 2rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+.work-area {
+  border-top: 2px solid var(--ink);
+  padding-top: 1rem;
+}
+.work-area h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.35rem;
+}
+.work-area h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+.work-area h3 a:hover {
+  color: var(--accent);
+}
+.work-area p {
+  color: var(--muted);
+  margin: 0;
+}
+@media (min-width: 48rem) {
+  .work-areas {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.work-areas__lead {
+  margin: 0 0 0.9rem;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+/* Four categories: 2 × 2 on mid-size screens, one row on wide ones. */
+@media (min-width: 40rem) {
+  .work-areas--four {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 64rem) {
+  .work-areas--four {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 /* ---------- Case studies ---------- */
 .cases {
   display: grid;
-  gap: clamp(2.5rem, 6vw, 4.5rem);
+  gap: var(--section-space);
 }
 
 .case {
@@ -432,33 +507,64 @@ video {
   border-top: 0;
   padding-top: 0;
 }
-
-.case__body {
-  max-width: 40rem;
+.case__body > :last-child {
+  margin-bottom: 0;
 }
 
-.case__context {
-  font-size: 0.9rem;
-  color: var(--muted);
-  margin-bottom: 0.5rem;
+
+.case__category {
+  margin-bottom: 0.35rem;
 }
 
 .case h3 {
-  font-size: clamp(1.4rem, 2.5vw, 1.75rem);
+  font-size: clamp(1.3rem, 2.2vw, 1.55rem);
+  /* Fill the line before wrapping (headings elsewhere use balanced wrapping). */
+  text-wrap: pretty;
 }
 
-.case__story {
-  margin: 0 0 1.25rem;
-}
-.case__story dt {
-  font-size: 0.78rem;
+.case__label {
+  /* One level below the category label: plain bold, not accent caps. */
+  font-size: 0.95rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
+  color: var(--ink);
 }
-.case__story dd {
-  margin: 0.15rem 0 1rem;
+.case__label {
+  margin-bottom: 0.4rem;
+}
+.case__audiences {
+  padding-left: 1.25rem;
+  margin: 0 0 1rem;
+}
+.case__audiences li + li {
+  margin-top: 0.5rem;
+}
+.case__experience {
+  margin: 1.5rem 0 1.25rem;
+}
+.case__experience ul {
+  padding-left: 1.25rem;
+  margin: 0;
+  color: var(--muted);
+}
+.case__experience li + li {
+  margin-top: 0.35rem;
+}
+.case__products {
+  display: grid;
+  gap: 2rem 2.5rem;
+}
+.case__product h4 {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  margin: 0 0 0.5rem;
+}
+.case__product .tags {
+  margin-bottom: 0;
+}
+@media (min-width: 56rem) {
+  .case__products {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .case__links {
@@ -475,13 +581,29 @@ video {
   text-decoration: underline;
 }
 
+/* The video floats so text wraps beside it, then runs full width below it. */
+.case__body {
+  display: flow-root;
+}
+.case--media .loop-video {
+  margin-block: 1rem 1.5rem;
+}
+.case--media .case__audiences,
+.case--media .case__experience ul {
+  display: flow-root;
+}
+.case .publications {
+  clear: both;
+}
 @media (min-width: 56rem) {
-  .case--media {
-    grid-template-columns: 1.25fr 1fr;
-    gap: 3.5rem;
+  .case--media .loop-video {
+    float: right;
+    width: 45%;
+    margin: 0.25rem 0 1rem 2.5rem;
   }
-  .case--media:nth-child(even) .case__body {
-    order: 2;
+  .case--media:nth-child(even) .loop-video {
+    float: left;
+    margin: 0.25rem 2.5rem 1rem 0;
   }
 }
 
@@ -499,12 +621,6 @@ video {
   background: var(--accent-soft);
   color: var(--ink);
   font-size: 0.85rem;
-}
-.tags--large li {
-  padding: 0.35rem 0.9rem;
-  font-size: 0.95rem;
-  background: var(--surface);
-  border: 1px solid var(--line);
 }
 
 /* ---------- Loop video ---------- */
@@ -544,7 +660,7 @@ video {
 
 /* ---------- Publications ---------- */
 .publications {
-  margin-top: clamp(2.5rem, 6vw, 4rem);
+  margin-top: 2rem;
   padding: 1.25rem 1.5rem;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -573,6 +689,7 @@ video {
 .skills {
   display: grid;
   gap: 1rem;
+  align-items: start;
 }
 /* A lone card on the last row stretches across it instead of leaving a gap. */
 @media (min-width: 40rem) and (max-width: 63.99rem) {
@@ -593,31 +710,67 @@ video {
 }
 
 .skill {
-  display: flex;
-  flex-direction: column;
-  padding: 1.5rem;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
+  transition: background-color 0.15s, border-color 0.15s;
+}
+/* Padding sits on the summary so the whole closed card is clickable. */
+.skill summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  list-style: none;
+}
+.skill summary::-webkit-details-marker {
+  display: none;
+}
+.skill summary::after {
+  content: '';
+  flex: none;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-right: 0.15rem;
+  border-right: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  transform: translateY(-20%) rotate(45deg);
+}
+.skill[open] summary::after {
+  transform: translateY(20%) rotate(-135deg);
+}
+/* Two lines tall, so closed cards match whether their title wraps or not. */
+@media (min-width: 40rem) {
+  .skill summary {
+    min-height: calc(2.5rem + 2 * 1.15 * 1.2rem);
+  }
 }
 .skill h3 {
+  margin: 0;
   font-size: 1.2rem;
+}
+.skill__body {
+  padding: 0 1.5rem 1.5rem;
 }
 .skill p {
   color: var(--muted);
   font-size: 0.975rem;
 }
-.skill__fields {
-  margin: auto 0 0;
-  padding-top: 0.9rem;
-  border-top: 1px solid var(--line);
-  color: var(--accent) !important;
-  font-weight: 600;
-  font-size: 0.875rem !important;
+.skill .tags {
+  margin: 0;
 }
-
-.toolbox__title {
-  margin-top: 3rem;
+/* Hover is limited to mice so the color doesn't stick after a tap on a phone. */
+@media (hover: hover) {
+  .skill:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+  }
+  .skill:hover .tags li {
+    background: var(--surface);
+  }
 }
 
 /* ---------- About ---------- */
@@ -628,16 +781,11 @@ video {
 .about__story {
   max-width: 40rem;
 }
-blockquote {
+.about__closing {
   margin: 2rem 0 0;
-  padding: 0.25rem 0 0.25rem 1.5rem;
-  border-left: 3px solid var(--accent);
   font-family: var(--serif);
   font-size: 1.35rem;
   line-height: 1.45;
-}
-blockquote p {
-  margin: 0;
 }
 
 .timeline {
@@ -689,11 +837,6 @@ blockquote p {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-@media (min-width: 64rem) {
-  .beyond {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
 .beyond__item {
   border-top: 2px solid var(--ink);
   padding-top: 1rem;
@@ -703,10 +846,6 @@ blockquote p {
 }
 .beyond__item p {
   color: var(--muted);
-}
-.beyond__item a {
-  font-weight: 600;
-  text-decoration: none;
 }
 
 /* ---------- Writing ---------- */
@@ -765,7 +904,6 @@ blockquote p {
   align-items: center;
 }
 .contact > p:not(.eyebrow) {
-  max-width: 36rem;
   color: var(--muted);
   font-size: 1.1rem;
 }
