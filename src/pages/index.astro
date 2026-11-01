@@ -1,0 +1,274 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import LoopVideo from '../components/LoopVideo.astro';
+import ThemePortrait from '../components/ThemePortrait.astro';
+import { formatDate, getPosts } from '../lib';
+import { beyond, caseStudies, journey, person, publications, skills, socials, whatICareAbout, workAreas } from '../data/profile';
+
+const posts = await getPosts();
+---
+
+<Base>
+  <!-- Hero -->
+  <section class="hero container">
+    <div class="hero__photo">
+      <ThemePortrait alt="Portrait of Souvik Mandal" />
+    </div>
+    <div class="hero__text">
+      <p class="eyebrow">{person.roles.join(' · ')}</p>
+      <h1>{person.headline}</h1>
+      <p class="lede" set:html={person.summary} />
+      <div class="actions">
+        <a href="#work" class="button">See my work</a>
+        <ul class="social-links" aria-label="Find me online">
+          {
+            socials
+              .filter((s) => s.key !== 'youtube')
+              .map((s) => (
+                <li>
+                  <a href={s.href} aria-label={s.label} title={s.label}>
+                    <Icon name={s.key} />
+                  </a>
+                </li>
+              ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission -->
+  <section id="care" class="care container">
+    <p class="eyebrow">Mission</p>
+    <h2>{whatICareAbout.heading}</h2>
+    <div class="work-areas">
+      {
+        whatICareAbout.areas.map((a) => (
+          <div class="work-area">
+            <h3><a href={a.href}>{a.label}</a></h3>
+            <p>{a.line}</p>
+          </div>
+        ))
+      }
+    </div>
+    <p class="care__closing">{whatICareAbout.closing}</p>
+  </section>
+
+  <!-- My work -->
+  <section id="work" class="section container">
+    <header class="section__header">
+      <p class="eyebrow">My work</p>
+      <h2>From modeling behavior to shipping AI products</h2>
+      <p>During my PhD, I worked on statistical modeling of searching, navigation, and cooperative behavior. During my postdoctoral research at Harvard, I built data and ML pipelines that automated extraction and analysis of behavioral data from videos at large scale. At <a href="https://www.labxchange.org/">LabXchange</a>, an online education platform, I took data and AI pipelines into production. Now I build data and AI solutions across the full lifecycle, from problem-framing to deploying the system.</p>
+    </header>
+
+    <p class="work-areas__lead">My experience spans:</p>
+    <div class="work-areas work-areas--four">
+      {
+        workAreas.map((a) => (
+          <div class="work-area">
+            <h3><a href={a.href}>{a.label}</a></h3>
+            <p>{a.line}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="cases">
+      {
+        caseStudies.map((c) => (
+          <article class:list={['case', { 'case--media': c.media }]} id={c.id}>
+            <div class="case__body">
+              <p class="eyebrow case__category">{c.category}</p>
+              <h3>{c.title}</h3>
+              {c.media && <LoopVideo {...c.media} />}
+              {c.vision.map((v) => <p set:html={v} />)}
+              {c.audiences && (
+                <>
+                  <p>{c.audiences.lead}</p>
+                  <ul class="case__audiences">
+                    {c.audiences.items.map((a) => (
+                      <li>
+                        <strong>{a.who}:</strong> {a.what}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+              {c.closing && <p>{c.closing}</p>}
+              {[c.interests, c.experience, c.projects].map(
+                (list) =>
+                  list && (
+                    <div class="case__experience">
+                      <p class="case__label">{list.label}</p>
+                      <ul>
+                        {list.items.map((e) => <li set:html={e} />)}
+                      </ul>
+                    </div>
+                  ),
+              )}
+              {c.products && (
+                <div class="case__products">
+                  {c.products.map((p) => (
+                    <section class="case__product" id={p.id}>
+                      <h4>{p.href ? <a href={p.href}>{p.name}</a> : p.name}</h4>
+                      <p>{p.body}</p>
+                      <ul class="tags" aria-label={`Skills: ${p.name}`}>
+                        {p.skills.map((s) => <li>{s}</li>)}
+                      </ul>
+                    </section>
+                  ))}
+                </div>
+              )}
+              {c.skills.length > 0 && (
+                <>
+                  <p class="case__label" id={`${c.id}-skills`}>Relevant skills</p>
+                  <ul class="tags" aria-labelledby={`${c.id}-skills`}>
+                    {c.skills.map((s) => <li>{s}</li>)}
+                  </ul>
+                </>
+              )}
+              {c.links.length > 0 && (
+                <p class="case__links">
+                  {c.links.map((l) => <a href={l.href}>{l.label} →</a>)}
+                </p>
+              )}
+              {c.publications && (
+                <details class="publications">
+                  <summary>Selected publications</summary>
+                  <ol>
+                    {publications.map((p) => (
+                      <li>
+                        {p.cite}. <a href={p.href}>{p.title}</a>. <em>{p.venue}</em>
+                      </li>
+                    ))}
+                  </ol>
+                  <p>
+                    Full list on <a href={socials.find((s) => s.key === 'scholar')!.href}>Google Scholar</a>. * joint first authors.
+                  </p>
+                </details>
+              )}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Transferable skills -->
+  <section id="skills" class="section section--tinted">
+    <div class="container">
+      <header class="section__header">
+        <p class="eyebrow">Transferable skills</p>
+        <h2>Skills built across science, education, and AI</h2>
+      </header>
+
+      <div class="skills">
+        {
+          skills.map((s) => (
+            <details class="skill">
+              <summary>
+                <h3>{s.title}</h3>
+              </summary>
+              <div class="skill__body">
+                <p>{s.hook}</p>
+                <ul class="tags" aria-label={`Keywords: ${s.title}`}>
+                  {s.keywords.map((k) => <li>{k}</li>)}
+                </ul>
+              </div>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section container about">
+    <div class="about__story">
+      <p class="eyebrow">About</p>
+      <h2>My vision</h2>
+      <p>
+        I dream of a just world where all life is treated with dignity and growth works with nature instead of against it. I believe making high-quality, relevant education available to everyone is the most sustainable way to get
+        there.
+      </p>
+      <p>
+        Learning outcomes are <a href="https://www.unicef.org/reports/state-global-education-crisis">falling for much of the world</a>. Too often, what students are taught doesn’t match what they want to learn, or what they will need.
+        Education should spark curiosity, cross subject boundaries and prepare people for real problems, backed by what research tells us about how people learn.
+      </p>
+      <p class="about__closing">Technology and AI can replace repetitive tasks, not humans, and augment the work people are passionate about. AI opens a new opportunity for a more equitable world, but seizing it would take a new kind of education, for everyone.</p>
+    </div>
+
+    <div class="about__journey">
+      <h3>The path so far</h3>
+      <ol class="timeline">
+        {
+          journey.map((j) => (
+            <li>
+              <span class="timeline__when">{j.when}</span>
+              <div>
+                <p class="timeline__what">{j.what}</p>
+                <p class="timeline__where">{j.where}</p>
+                <p class="timeline__note" set:html={j.note} />
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Beyond work -->
+  <section id="beyond" class="section section--tinted">
+    <div class="container">
+      <header class="section__header">
+        <p class="eyebrow">Beyond work</p>
+        <h2>The other side of me</h2>
+      </header>
+      <div class="beyond">
+        {
+          beyond.map((b) => (
+            <article class="beyond__item">
+              <h3>{b.title}</h3>
+              <p>{b.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Writing (appears automatically once src/content/writing has a post) -->
+  {
+    posts.length > 0 && (
+      <section id="writing" class="section container">
+        <header class="section__header">
+          <p class="eyebrow">Writing</p>
+          <h2>Notes and essays</h2>
+        </header>
+        <ul class="posts">
+          {posts.map((p) => (
+            <li>
+              <a href={`/writing/${p.id}/`}>{p.data.title}</a>
+              <p>{p.data.description}</p>
+              <time datetime={p.data.date.toISOString()}>{formatDate(p.data.date)}</time>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  <!-- Contact -->
+  <section id="contact" class="section container contact">
+    <p class="eyebrow">Contact</p>
+    <h2>Let’s talk</h2>
+    <p>I’m always glad to talk about data and AI roles, responsible AI, learning science, or a project we could build together. I also consult on data and AI/ML for research labs and early-stage startups.</p>
+    <p class="contact__location">Based in {person.location}</p>
+    <div class="actions">
+      <a href={`mailto:${person.email}`} class="button"><Icon name="email" size={18} /> {person.email}</a>
+      <a href={socials.find((s) => s.key === 'linkedin')!.href} class="button button--ghost">Connect on LinkedIn</a>
+    </div>
+  </section>
+</Base>
