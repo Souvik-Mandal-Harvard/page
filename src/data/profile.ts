@@ -134,7 +134,6 @@ export const caseStudies: CaseStudy[] = [
         '<a href="https://brain.harvard.edu/grants/grant/?slug=postdoc-pioneers-grant-program">Harvard Brain Science Initiative Postdoc Pioneers Grant</a>, initiating researcher and grant manager · 2022',
         'Visiting Scientist, <a href="https://www.univ-tlse3.fr/structures-de-recherche/centre-de-recherches-sur-la-cognition-animale">Centre de Recherches sur la Cognition Animale</a>, Université de Toulouse · 2016',
         'Ph.D., Quantitative Behavioral Sciences, <a href="https://www.iisc.ac.in/">Indian Institute of Science</a> · 2009–2017',
-        'National winner, EURAXESS science communication competition · 2015',
       ],
     },
     projects: {
