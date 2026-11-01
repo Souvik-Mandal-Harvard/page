@@ -1,0 +1,59 @@
+---
+// A lightweight replacement for an animated GIF. Nothing downloads until the
+// video scrolls into view, it pauses off-screen, and visitors who prefer
+// reduced motion get the still poster with normal play controls instead.
+interface Props {
+  src: string;
+  poster: string;
+  width: number;
+  height: number;
+  caption: string;
+}
+
+const { src, poster, width, height, caption } = Astro.props;
+---
+
+<figure class="loop-video">
+  <div class="loop-video__frame">
+    <video src={src} poster={poster} width={width} height={height} muted loop playsinline preload="none" controls aria-label={caption} data-loop-video></video>
+    <button type="button" class="loop-video__toggle" aria-pressed="false" hidden>Pause</button>
+  </div>
+  <figcaption>{caption}</figcaption>
+</figure>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const { target, isIntersecting } of entries) {
+          const video = target as HTMLVideoElement;
+          if (video.dataset.userPaused) continue;
+          if (isIntersecting) video.play().catch(() => {});
+          else video.pause();
+        }
+      },
+      { threshold: 0.25 },
+    );
+
+    document.querySelectorAll<HTMLVideoElement>('video[data-loop-video]').forEach((video) => {
+      const toggle = video.parentElement!.querySelector<HTMLButtonElement>('.loop-video__toggle')!;
+      video.controls = false;
+      toggle.hidden = false;
+      toggle.addEventListener('click', () => {
+        const pausing = !video.paused;
+        if (pausing) {
+          video.dataset.userPaused = 'true';
+          video.pause();
+        } else {
+          delete video.dataset.userPaused;
+          video.play().catch(() => {});
+        }
+        toggle.textContent = pausing ? 'Play' : 'Pause';
+        toggle.setAttribute('aria-pressed', String(pausing));
+      });
+      observer.observe(video);
+    });
+  }
+</script>
